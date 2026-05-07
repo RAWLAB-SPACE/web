@@ -7,19 +7,29 @@ import { LivingArchiveSection } from "@/sections/LivingArchiveSection";
 import { ManifestoSection } from "@/sections/ManifestoSection";
 import { ProjectsPreviewSection } from "@/sections/ProjectsPreviewSection";
 import { AmbientBackground } from "@/components/AmbientBackground";
+import { StarfieldBackground } from "@/components/StarfieldBackground";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#050816] text-slate-100">
+    <main
+      className="min-h-screen transition-colors duration-500"
+      style={{
+        background: "var(--background)",
+        color: "var(--foreground)",
+      }}
+    >
       <AmbientBackground />
-      <Navigation />
-      <HeroSection />
-      <AreasSection />
-      <CurrentStateSection />
-      <ProjectsPreviewSection />
-      <LivingArchiveSection />
-      <ManifestoSection />
-      <Footer />
+      <StarfieldBackground />
+      <div className="relative z-10">
+        <Navigation />
+        <HeroSection />
+        <AreasSection />
+        <CurrentStateSection />
+        <ProjectsPreviewSection />
+        <LivingArchiveSection />
+        <ManifestoSection />
+        <Footer />
+      </div>
     </main>
   );
 }
