@@ -2,17 +2,28 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { collageItems } from "@/data/collageItems";
 
-const filters = ["All", ...Array.from(new Set(collageItems.map((item) => item.type)))];
+type CollageItem = (typeof collageItems)[number];
 
 export function VisualArchiveSection() {
-  const [activeFilter, setActiveFilter] = useState("All");
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [selectedItem, setSelectedItem] = useState<CollageItem | null>(null);
 
-  const filteredItems =
-    activeFilter === "All"
-      ? collageItems
-      : collageItems.filter((item) => item.type === activeFilter);
+  const activeItem = collageItems[activeIndex];
+
+  function goToPrevious() {
+    setActiveIndex((current) =>
+      current === 0 ? collageItems.length - 1 : current - 1
+    );
+  }
+
+  function goToNext() {
+    setActiveIndex((current) =>
+      current === collageItems.length - 1 ? 0 : current + 1
+    );
+  }
 
   return (
     <section id="visual-archive" className="px-6 py-32">
@@ -27,57 +38,130 @@ export function VisualArchiveSection() {
           </h2>
 
           <p className="mt-6 text-sm leading-7 text-slate-400">
-            A living collection of climbing, textures, nature and photography.
-            Nothing needs to be perfect to belong here.
+            A compact living collection of climbing, textures, nature and
+            photography.
           </p>
         </div>
 
-        <div className="mb-12 flex flex-wrap gap-3">
-          {filters.map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              className="rounded-full border px-4 py-2 text-xs uppercase tracking-[0.2em] transition"
-              style={{
-                borderColor:
-                  activeFilter === filter ? "var(--accent)" : "var(--border)",
-                color:
-                  activeFilter === filter ? "var(--accent)" : "var(--muted)",
-                background:
-                  activeFilter === filter ? "var(--card)" : "transparent",
-              }}
-            >
-              {filter}
-            </button>
-          ))}
-        </div>
+        <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+          <button
+            onClick={() => setSelectedItem(activeItem)}
+            className="group relative h-[32rem] overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] text-left"
+          >
+            <Image
+              src={activeItem.image}
+              alt={activeItem.title}
+              fill
+              className="object-cover transition duration-700 group-hover:scale-105"
+            />
 
-        <div className="columns-1 gap-5 md:columns-2 lg:columns-3">
-          {filteredItems.map((item) => (
-            <article
-              key={item.image}
-              className="group mb-5 break-inside-avoid overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]"
-            >
-              <div className="relative h-72 overflow-hidden">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  className="object-cover transition duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/70" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/80" />
+
+            <div className="absolute bottom-0 left-0 p-8">
+              <p className="text-xs uppercase tracking-[0.35em] text-violet-300">
+                {activeItem.type}
+              </p>
+
+              <h3 className="mt-4 text-4xl font-semibold text-white">
+                {activeItem.title}
+              </h3>
+
+              <p className="mt-4 text-xs uppercase tracking-[0.25em] text-slate-300">
+                Open fragment
+              </p>
+            </div>
+          </button>
+
+          <div className="flex flex-col justify-between rounded-[2rem] border border-white/10 bg-white/[0.03] p-6">
+            <div>
+              <p className="text-xs uppercase tracking-[0.35em] text-violet-300">
+                {String(activeIndex + 1).padStart(2, "0")} /{" "}
+                {String(collageItems.length).padStart(2, "0")}
+              </p>
+
+              <h3 className="mt-6 text-3xl font-semibold">
+                {activeItem.title}
+              </h3>
+
+              <p className="mt-4 text-sm leading-7 text-slate-400">
+                This fragment belongs to the RAWLAB_ visual system: movement,
+                texture, atmosphere and process.
+              </p>
+            </div>
+
+            <div className="mt-10">
+              <div className="mb-6 grid grid-cols-4 gap-3">
+                {collageItems.slice(0, 8).map((item, index) => (
+                  <button
+                    key={item.image}
+                    onClick={() => setActiveIndex(index)}
+                    className={`relative h-20 overflow-hidden rounded-2xl border transition ${
+                      activeIndex === index
+                        ? "border-violet-300"
+                        : "border-white/10 opacity-60 hover:opacity-100"
+                    }`}
+                  >
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </button>
+                ))}
               </div>
 
-              <div className="p-6">
-                <p className="text-xs uppercase tracking-[0.35em] text-violet-300">
-                  {item.type}
-                </p>
-                <h3 className="mt-4 text-xl font-semibold">{item.title}</h3>
+              <div className="flex gap-3">
+                <button
+                  onClick={goToPrevious}
+                  className="rounded-full border border-white/10 p-3 transition hover:border-violet-300/50 hover:text-violet-300"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </button>
+
+                <button
+                  onClick={goToNext}
+                  className="rounded-full border border-white/10 p-3 transition hover:border-violet-300/50 hover:text-violet-300"
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </button>
               </div>
-            </article>
-          ))}
+            </div>
+          </div>
         </div>
       </div>
+
+      {selectedItem && (
+        <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/80 px-6 backdrop-blur-md">
+          <button
+            onClick={() => setSelectedItem(null)}
+            className="absolute right-6 top-6 rounded-full border border-white/10 bg-white/10 p-3 text-white transition hover:bg-white/20"
+            aria-label="Close image preview"
+          >
+            <X className="h-5 w-5" />
+          </button>
+
+          <div className="relative h-[75vh] w-full max-w-5xl overflow-hidden rounded-[2rem] border border-white/10">
+            <Image
+              src={selectedItem.image}
+              alt={selectedItem.title}
+              fill
+              className="object-cover"
+            />
+
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-8">
+              <p className="text-xs uppercase tracking-[0.35em] text-violet-300">
+                {selectedItem.type}
+              </p>
+              <h3 className="mt-4 text-3xl font-semibold text-white">
+                {selectedItem.title}
+              </h3>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
