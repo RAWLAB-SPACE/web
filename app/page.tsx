@@ -1,0 +1,19 @@
+import { Footer } from "@/components/Footer";
+import { Navigation } from "@/components/Navigation";
+import { AreasSection } from "@/sections/AreasSection";
+import { CurrentStateSection } from "@/sections/CurrentStateSection";
+import { HeroSection } from "@/sections/HeroSection";
+import { ManifestoSection } from "@/sections/ManifestoSection";
+
+export default function Home() {
+  return (
+    <main className="min-h-screen bg-[#050816] text-slate-100">
+      <Navigation />
+      <HeroSection />
+      <AreasSection />
+      <CurrentStateSection />
+      <ManifestoSection />
+      <Footer />
+    </main>
+  );
+}
