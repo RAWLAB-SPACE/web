@@ -1,11 +1,23 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import { collageItems } from "@/data/collageItems";
 
+const filters = ["All", ...Array.from(new Set(collageItems.map((item) => item.type)))];
+
 export function VisualArchiveSection() {
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  const filteredItems =
+    activeFilter === "All"
+      ? collageItems
+      : collageItems.filter((item) => item.type === activeFilter);
+
   return (
     <section id="visual-archive" className="px-6 py-32">
       <div className="mx-auto max-w-6xl">
-        <div className="mb-14 max-w-3xl">
+        <div className="mb-10 max-w-3xl">
           <p className="text-sm uppercase tracking-[0.4em] text-violet-300">
             Visual archive
           </p>
@@ -20,8 +32,28 @@ export function VisualArchiveSection() {
           </p>
         </div>
 
+        <div className="mb-12 flex flex-wrap gap-3">
+          {filters.map((filter) => (
+            <button
+              key={filter}
+              onClick={() => setActiveFilter(filter)}
+              className="rounded-full border px-4 py-2 text-xs uppercase tracking-[0.2em] transition"
+              style={{
+                borderColor:
+                  activeFilter === filter ? "var(--accent)" : "var(--border)",
+                color:
+                  activeFilter === filter ? "var(--accent)" : "var(--muted)",
+                background:
+                  activeFilter === filter ? "var(--card)" : "transparent",
+              }}
+            >
+              {filter}
+            </button>
+          ))}
+        </div>
+
         <div className="columns-1 gap-5 md:columns-2 lg:columns-3">
-          {collageItems.map((item) => (
+          {filteredItems.map((item) => (
             <article
               key={item.image}
               className="group mb-5 break-inside-avoid overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]"
