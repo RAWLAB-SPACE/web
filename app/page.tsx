@@ -8,6 +8,7 @@ import { ManifestoSection } from "@/sections/ManifestoSection";
 import { ProjectsPreviewSection } from "@/sections/ProjectsPreviewSection";
 import { AmbientBackground } from "@/components/AmbientBackground";
 import { StarfieldBackground } from "@/components/StarfieldBackground";
+import { ConnectedSignalsSection } from "@/sections/ConnectedSignalsSection";
 
 export default function Home() {
   return (
@@ -27,6 +28,7 @@ export default function Home() {
         <CurrentStateSection />
         <ProjectsPreviewSection />
         <LivingArchiveSection />
+        <ConnectedSignalsSection />
         <ManifestoSection />
         <Footer />
       </div>
