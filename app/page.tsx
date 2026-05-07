@@ -4,6 +4,7 @@ import { AreasSection } from "@/sections/AreasSection";
 import { CurrentStateSection } from "@/sections/CurrentStateSection";
 import { HeroSection } from "@/sections/HeroSection";
 import { ManifestoSection } from "@/sections/ManifestoSection";
+import { ProjectsPreviewSection } from "@/sections/ProjectsPreviewSection";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <HeroSection />
       <AreasSection />
       <CurrentStateSection />
+      <ProjectsPreviewSection />
       <ManifestoSection />
       <Footer />
     </main>
