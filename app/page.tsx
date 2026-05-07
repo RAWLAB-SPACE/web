@@ -6,10 +6,12 @@ import { HeroSection } from "@/sections/HeroSection";
 import { LivingArchiveSection } from "@/sections/LivingArchiveSection";
 import { ManifestoSection } from "@/sections/ManifestoSection";
 import { ProjectsPreviewSection } from "@/sections/ProjectsPreviewSection";
+import { AmbientBackground } from "@/components/AmbientBackground";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#050816] text-slate-100">
+      <AmbientBackground />
       <Navigation />
       <HeroSection />
       <AreasSection />
