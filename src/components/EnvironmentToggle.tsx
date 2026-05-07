@@ -4,16 +4,8 @@ import { useState } from "react";
 
 type Theme = "void" | "light";
 
-function getInitialTheme(): Theme {
-  if (typeof window === "undefined") return "void";
-
-  const savedTheme = window.localStorage.getItem("rawlab-theme");
-
-  return savedTheme === "light" ? "light" : "void";
-}
-
 export function EnvironmentToggle() {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const [theme, setTheme] = useState<Theme>("void");
 
   function handleToggleTheme() {
     const nextTheme = theme === "void" ? "light" : "void";
@@ -22,8 +14,6 @@ export function EnvironmentToggle() {
 
     document.documentElement.dataset.theme =
       nextTheme === "light" ? "light" : "";
-
-    window.localStorage.setItem("rawlab-theme", nextTheme);
   }
 
   return (

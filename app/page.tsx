@@ -12,6 +12,7 @@ import { ConnectedSignalsSection } from "@/sections/ConnectedSignalsSection";
 import { CursorGlow } from "@/components/CursorGlow";
 import { DocumentsSection } from "@/sections/DocumentsSection";
 import { VisualArchiveSection } from "@/sections/VisualArchiveSection";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 export default function Home() {
   return (
@@ -25,6 +26,7 @@ export default function Home() {
       <AmbientBackground />
       <StarfieldBackground />
       <CursorGlow />
+      <LanguageProvider>
       <div className="relative z-10">
         <Navigation />
         <HeroSection />
@@ -39,6 +41,7 @@ export default function Home() {
         
         <Footer />
       </div>
+      </LanguageProvider>
     </main>
   );
 }
