@@ -1,3 +1,5 @@
+import { FloatingCard } from "@/components/FloatingCard";
+
 const projects = [
   {
     title: "Frontend / Mobile",
@@ -60,6 +62,7 @@ export function ProjectsPreviewSection() {
 
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project) => (
+            <FloatingCard key={project.title} className="h-full">
             <article
               key={project.title}
               className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-7 transition hover:-translate-y-1 hover:border-violet-300/50 hover:bg-white/[0.06]"
@@ -78,6 +81,7 @@ export function ProjectsPreviewSection() {
                 {project.description}
               </p>
             </article>
+            </FloatingCard>
           ))}
         </div>
       </div>

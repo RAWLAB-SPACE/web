@@ -1,4 +1,5 @@
 import { signals } from "@/data/signals";
+import { FloatingCard } from "@/components/FloatingCard";
 
 export function ConnectedSignalsSection() {
   return (
@@ -24,38 +25,42 @@ export function ConnectedSignalsSection() {
             const Icon = signal.icon;
 
             return (
-              <a
+              <FloatingCard
                 key={signal.label}
-                href={signal.href}
-                target={signal.href.startsWith("http") ? "_blank" : undefined}
-                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-7 transition hover:-translate-y-1 hover:border-violet-300/50 hover:bg-white/[0.06]"
+                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-7 transition hover:border-violet-300/50 hover:bg-white/[0.06]"
               >
-                <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-violet-500/10 blur-2xl transition group-hover:bg-violet-500/20" />
+                <a
+                  href={signal.href}
+                  target={signal.href.startsWith("http") ? "_blank" : undefined}
+                  className="block"
+                >
+                  <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-violet-500/10 blur-2xl transition group-hover:bg-violet-500/20" />
 
-                <div className="relative z-10 flex items-start justify-between gap-6">
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.35em] text-violet-300">
-                      {signal.label}
-                    </p>
+                  <div className="relative z-10 flex items-start justify-between gap-6">
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.35em] text-violet-300">
+                        {signal.label}
+                      </p>
 
-                    <h3 className="mt-5 text-2xl font-semibold">
-                      {signal.title}
-                    </h3>
+                      <h3 className="mt-5 text-2xl font-semibold">
+                        {signal.title}
+                      </h3>
+                    </div>
+
+                    <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 transition group-hover:scale-110 group-hover:border-violet-300/40">
+                      <Icon className="h-5 w-5 text-violet-300" />
+                    </div>
                   </div>
 
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 transition group-hover:scale-110 group-hover:border-violet-300/40">
-                    <Icon className="h-5 w-5 text-violet-300" />
-                  </div>
-                </div>
+                  <p className="relative z-10 mt-4 max-w-xl text-sm leading-7 text-slate-400">
+                    {signal.description}
+                  </p>
 
-                <p className="relative z-10 mt-4 max-w-xl text-sm leading-7 text-slate-400">
-                  {signal.description}
-                </p>
-
-                <p className="relative z-10 mt-8 text-xs uppercase tracking-[0.25em] text-slate-500 transition group-hover:text-violet-300">
-                  Connect signal →
-                </p>
-              </a>
+                  <p className="relative z-10 mt-8 text-xs uppercase tracking-[0.25em] text-slate-500 transition group-hover:text-violet-300">
+                    Connect signal →
+                  </p>
+                </a>
+              </FloatingCard>
             );
           })}
         </div>
