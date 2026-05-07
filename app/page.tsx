@@ -9,6 +9,7 @@ import { ProjectsPreviewSection } from "@/sections/ProjectsPreviewSection";
 import { AmbientBackground } from "@/components/AmbientBackground";
 import { StarfieldBackground } from "@/components/StarfieldBackground";
 import { ConnectedSignalsSection } from "@/sections/ConnectedSignalsSection";
+import { CursorGlow } from "@/components/CursorGlow";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
     >
       <AmbientBackground />
       <StarfieldBackground />
+      <CursorGlow />
       <div className="relative z-10">
         <Navigation />
         <HeroSection />
