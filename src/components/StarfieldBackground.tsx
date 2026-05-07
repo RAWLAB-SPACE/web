@@ -1,89 +1,62 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { useState } from "react";
+import type { CSSProperties } from "react";
 
 type Star = {
   id: number;
   left: string;
   top: string;
   size: number;
-  duration: number;
-  delay: number;
-  driftX: number;
-  driftY: number;
+  duration: string;
+  delay: string;
+  driftX: string;
+  driftY: string;
   opacity: number;
 };
 
-function generateStars(): Star[] {
-  return Array.from({ length: 110 }, (_, index) => ({
-    id: index,
-    left: `${Math.random() * 100}%`,
-    top: `${Math.random() * 100}%`,
-    size: Math.random() > 0.85 ? 2 : 1,
-    duration: Math.random() * 4 + 3,
-    delay: Math.random() * 5,
-    driftX: Math.random() * 16 - 8,
-    driftY: Math.random() * 16 - 8,
-    opacity: Math.random() * 0.5 + 0.25,
-  }));
+function pseudoRandom(seed: number) {
+  const x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
 }
 
-export function StarfieldBackground() {
-  const [stars] = useState(generateStars);
+const stars: Star[] = Array.from({ length: 90 }, (_, index) => {
+  const seed = index + 1;
 
+  return {
+    id: index,
+    left: `${pseudoRandom(seed * 1.3) * 100}%`,
+    top: `${pseudoRandom(seed * 2.1) * 100}%`,
+    size: pseudoRandom(seed * 3.7) > 0.85 ? 2 : 1,
+    duration: `${pseudoRandom(seed * 4.2) * 4 + 3}s`,
+    delay: `${pseudoRandom(seed * 5.4) * 5}s`,
+    driftX: `${pseudoRandom(seed * 6.8) * 16 - 8}px`,
+    driftY: `${pseudoRandom(seed * 7.9) * 16 - 8}px`,
+    opacity: pseudoRandom(seed * 8.5) * 0.45 + 0.25,
+  };
+});
+
+export function StarfieldBackground() {
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
       {stars.map((star) => (
-        <motion.span
+        <span
           key={star.id}
-          className="absolute rounded-full"
-          style={{
-            left: star.left,
-            top: star.top,
-            width: star.size,
-            height: star.size,
-            background: "var(--star-color)",
-            boxShadow: "0 0 14px var(--star-glow)",
-          }}
-          initial={{
-            opacity: star.opacity,
-            x: 0,
-            y: 0,
-            scale: 1,
-          }}
-          animate={{
-            opacity: [star.opacity, star.opacity + 0.35, star.opacity],
-            x: [0, star.driftX, 0],
-            y: [0, star.driftY, 0],
-            scale: [1, 1.8, 1],
-          }}
-          transition={{
-            duration: star.duration,
-            delay: star.delay,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          className="raw-star absolute rounded-full"
+          style={
+            {
+              left: star.left,
+              top: star.top,
+              width: `${star.size}px`,
+              height: `${star.size}px`,
+              opacity: star.opacity,
+              animationDuration: star.duration,
+              animationDelay: star.delay,
+              "--drift-x": star.driftX,
+              "--drift-y": star.driftY,
+            } as CSSProperties
+          }
         />
       ))}
 
-      <motion.div
-        className="absolute left-[-20%] top-[20%] h-px w-[35rem] rotate-[-18deg]"
-        style={{
-          background:
-            "linear-gradient(90deg, transparent, var(--star-glow), transparent)",
-        }}
-        animate={{
-          x: ["0vw", "140vw"],
-          opacity: [0, 0.7, 0],
-        }}
-        transition={{
-          duration: 9,
-          repeat: Infinity,
-          repeatDelay: 12,
-          ease: "easeInOut",
-        }}
-      />
+      <span className="raw-shooting-star absolute left-[-20%] top-[20%] h-px w-[35rem] rotate-[-18deg]" />
     </div>
   );
 }

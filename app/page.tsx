@@ -10,6 +10,8 @@ import { AmbientBackground } from "@/components/AmbientBackground";
 import { StarfieldBackground } from "@/components/StarfieldBackground";
 import { ConnectedSignalsSection } from "@/sections/ConnectedSignalsSection";
 import { CursorGlow } from "@/components/CursorGlow";
+import { DocumentsSection } from "@/sections/DocumentsSection";
+import { VisualArchiveSection } from "@/sections/VisualArchiveSection";
 
 export default function Home() {
   return (
@@ -30,8 +32,11 @@ export default function Home() {
         <CurrentStateSection />
         <ProjectsPreviewSection />
         <LivingArchiveSection />
+        <VisualArchiveSection />
         <ConnectedSignalsSection />
+        <DocumentsSection />
         <ManifestoSection />
+        
         <Footer />
       </div>
     </main>

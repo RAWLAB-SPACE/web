@@ -56,3 +56,51 @@ article {
     box-shadow 0.4s ease,
     transform 0.3s ease;
 }
+.raw-star {
+  background: var(--star-color);
+  box-shadow: 0 0 14px var(--star-glow);
+  animation-name: raw-star-drift;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes raw-star-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(var(--drift-x), var(--drift-y), 0) scale(1.6);
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.raw-shooting-star {
+  background: linear-gradient(90deg, transparent, var(--star-glow), transparent);
+  animation: raw-shooting-star 21s ease-in-out infinite;
+}
+
+@keyframes raw-shooting-star {
+  0%,
+  55% {
+    transform: translateX(0) rotate(-18deg);
+    opacity: 0;
+  }
+
+  65% {
+    opacity: 0.7;
+  }
+
+  85% {
+    transform: translateX(140vw) rotate(-18deg);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
