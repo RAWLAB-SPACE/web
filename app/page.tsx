@@ -3,6 +3,7 @@ import { Navigation } from "@/components/Navigation";
 import { AreasSection } from "@/sections/AreasSection";
 import { CurrentStateSection } from "@/sections/CurrentStateSection";
 import { HeroSection } from "@/sections/HeroSection";
+import { LivingArchiveSection } from "@/sections/LivingArchiveSection";
 import { ManifestoSection } from "@/sections/ManifestoSection";
 import { ProjectsPreviewSection } from "@/sections/ProjectsPreviewSection";
 
@@ -14,6 +15,7 @@ export default function Home() {
       <AreasSection />
       <CurrentStateSection />
       <ProjectsPreviewSection />
+      <LivingArchiveSection />
       <ManifestoSection />
       <Footer />
     </main>
