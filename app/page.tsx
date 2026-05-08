@@ -14,6 +14,7 @@ import { DocumentsSection } from "@/sections/DocumentsSection";
 import { VisualArchiveSection } from "@/sections/VisualArchiveSection";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { ScrollProgress } from "@/components/ScrollProgress";
+import { GithubSection } from "@/sections/GithubSection";
 
 export default function Home() {
   return (
@@ -35,12 +36,12 @@ export default function Home() {
           <AreasSection />
           <CurrentStateSection />
           <ProjectsPreviewSection />
+          <GithubSection />
           <LivingArchiveSection />
           <VisualArchiveSection />
           <ConnectedSignalsSection />
           <DocumentsSection />
           <ManifestoSection />
-
           <Footer />
         </div>
       </LanguageProvider>
