@@ -69,6 +69,13 @@ export const copy = {
       paragraphTwo:
         "This is not a finished portfolio. It is a living archive: a place where projects, notes, images, technical decisions and emotional process can coexist as part of the same system.",
     },
+    footer: {
+      rights: "RAWLAB_ © 2026",
+      github: "GitHub",
+      linkedin: "LinkedIn",
+      instagram: "Instagram",
+      note: "Built as a living creative system.",
+    },
   },
 
   es: {
@@ -137,6 +144,13 @@ export const copy = {
         "RAWLAB_ es un espacio para ideas en bruto, sistemas digitales, experimentos visuales y proceso humano. Conecta código, diseño, movimiento, escalada, fotografía e identidad creativa.",
       paragraphTwo:
         "Esto no es un portfolio terminado. Es un archivo vivo: un lugar donde proyectos, notas, imágenes, decisiones técnicas y proceso emocional pueden convivir dentro del mismo sistema.",
+    },
+    footer: {
+      rights: "RAWLAB_ © 2026",
+      github: "GitHub",
+      linkedin: "LinkedIn",
+      instagram: "Instagram",
+      note: "Construido como un sistema creativo vivo.",
     },
   },
 };
