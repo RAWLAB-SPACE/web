@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { X, ExternalLink } from "lucide-react";
 import type { InstagramFragment } from "@/lib/instagram";
 
 type InstagramSignalSectionProps = {
@@ -11,6 +13,9 @@ type InstagramSignalSectionProps = {
 export function InstagramSignalSection({
   fragments,
 }: InstagramSignalSectionProps) {
+  const [activeFragment, setActiveFragment] =
+    useState<InstagramFragment | null>(null);
+
   return (
     <section id="instagram" className="px-6 py-32">
       <div className="mx-auto max-w-7xl">
@@ -46,8 +51,10 @@ export function InstagramSignalSection({
             ];
 
             return (
-              <motion.article
+              <motion.button
                 key={item.image}
+                type="button"
+                onClick={() => setActiveFragment(item)}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 animate={{
@@ -55,7 +62,10 @@ export function InstagramSignalSection({
                   rotate: [-2, 1, -2],
                 }}
                 transition={{
-                  opacity: { duration: 0.7, delay: index * 0.1 },
+                  opacity: {
+                    duration: 0.7,
+                    delay: index * 0.1,
+                  },
                   y: {
                     duration: 5 + index,
                     repeat: Infinity,
@@ -74,6 +84,7 @@ export function InstagramSignalSection({
                   group absolute w-[18rem]
                   overflow-hidden rounded-[2rem]
                   border-0 bg-transparent
+                  text-left
                   shadow-2xl shadow-black/30
                   transform-gpu will-change-transform
                   hover:z-50
@@ -107,14 +118,88 @@ export function InstagramSignalSection({
                   <h3 className="mt-3 text-2xl font-semibold text-white">
                     {item.title}
                   </h3>
+
+                  <p className="mt-4 text-[10px] uppercase tracking-[0.25em] text-slate-300 opacity-0 transition group-hover:opacity-100">
+                    Open fragment
+                  </p>
                 </div>
 
                 <div className="absolute right-4 top-4 h-2 w-2 rounded-full bg-violet-300 shadow-[0_0_12px_rgba(196,181,253,0.8)]" />
-              </motion.article>
+              </motion.button>
             );
           })}
         </div>
       </div>
+
+      {activeFragment && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 px-6 backdrop-blur-xl">
+          <button
+            onClick={() => setActiveFragment(null)}
+            className="absolute right-6 top-6 rounded-full border border-white/10 bg-white/10 p-3 text-white transition hover:bg-white/20"
+            aria-label="Close fragment viewer"
+          >
+            <X className="h-5 w-5" />
+          </button>
+
+          <motion.div
+            initial={{ opacity: 0, y: 28, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            className="grid w-full max-w-6xl overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/50 md:grid-cols-[1.1fr_0.9fr]"
+          >
+            <div className="relative min-h-[70vh]">
+              <Image
+                src={activeFragment.image}
+                alt={activeFragment.title}
+                fill
+                className="object-cover"
+              />
+
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+            </div>
+
+            <div className="flex flex-col justify-between p-8 md:p-10">
+              <div>
+                <p className="text-xs uppercase tracking-[0.35em] text-violet-300">
+                  {activeFragment.source === "instagram"
+                    ? "Live Instagram"
+                    : "Curated signal"}
+                </p>
+
+                <h3 className="mt-8 text-4xl font-black tracking-tight text-white md:text-6xl">
+                  {activeFragment.title}
+                </h3>
+
+                <p className="mt-8 text-sm leading-7 text-slate-300">
+                  This fragment belongs to the RAWLAB_ visual system: movement,
+                  social signals, photography and process, reinterpreted as
+                  atmosphere.
+                </p>
+              </div>
+
+              <div className="mt-10 flex flex-wrap gap-3">
+                <span className="rounded-full border border-white/10 px-4 py-2 text-xs uppercase tracking-[0.25em] text-slate-300">
+                  @{activeFragment.type}
+                </span>
+
+                <span className="rounded-full border border-white/10 px-4 py-2 text-xs uppercase tracking-[0.25em] text-slate-300">
+                  {activeFragment.source || "mock"}
+                </span>
+
+                {activeFragment.permalink && (
+                  <a
+                    href={activeFragment.permalink}
+                    target="_blank"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-xs uppercase tracking-[0.25em] text-slate-300 transition hover:border-violet-300/50 hover:text-violet-300"
+                  >
+                    Instagram
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </section>
   );
 }
