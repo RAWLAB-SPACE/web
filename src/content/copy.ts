@@ -26,6 +26,20 @@ export const copy = {
       fragmentDescription:
         "This fragment belongs to the RAWLAB_ visual system: movement, texture, atmosphere and process.",
     },
+    github: {
+      eyebrow: "GitHub activity",
+      title: "Real systems. Real repositories.",
+      description:
+        "RAWLAB_ documents the technical layer through repositories, language signals, experiments, commits and systems in progress.",
+      empty:
+        "GitHub activity will appear here once repositories are available.",
+      stream: "Repository stream",
+      primaryLanguage: "Primary language",
+      repositoryFocus: "Repository focus",
+      lastUpdate: "Last update",
+      openRepository: "Open repository",
+      signalGraph: "Repo signal graph",
+    },
   },
 
   es: {
@@ -52,6 +66,20 @@ export const copy = {
       paused: "Pausado",
       fragmentDescription:
         "Este fragmento pertenece al sistema visual RAWLAB_: movimiento, textura, atmósfera y proceso.",
+    },
+    github: {
+      eyebrow: "Actividad GitHub",
+      title: "Sistemas reales. Repositorios vivos.",
+      description:
+        "RAWLAB_ documenta la capa técnica a través de repositorios, lenguajes, experimentos, commits y sistemas en construcción.",
+      empty:
+        "La actividad de GitHub aparecerá aquí cuando existan repositorios disponibles.",
+      stream: "Flujo de repositorios",
+      primaryLanguage: "Lenguaje principal",
+      repositoryFocus: "Foco del repo",
+      lastUpdate: "Última actualización",
+      openRepository: "Abrir repositorio",
+      signalGraph: "Gráfico del repo",
     },
   },
 };

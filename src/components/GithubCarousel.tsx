@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
-import type { GithubRepo } from "@/lib/github";
 import { RepoSignalGraph } from "@/components/RepoSignalGraph";
+import type { GithubRepo } from "@/lib/github";
 
 type GithubCarouselProps = {
   repos: GithubRepo[];
@@ -34,15 +34,20 @@ export function GithubCarousel({ repos }: GithubCarouselProps) {
 
   function goToPrevious() {
     setActiveIndex((current) =>
-      current === 0 ? repos.length - 1 : current - 1,
+      current === 0 ? repos.length - 1 : current - 1
     );
   }
 
   function goToNext() {
     setActiveIndex((current) =>
-      current === repos.length - 1 ? 0 : current + 1,
+      current === repos.length - 1 ? 0 : current + 1
     );
   }
+
+  const fallbackTopics = ["rawlab", "frontend", "creative-code"];
+  const repoTopics = activeRepo.topics.length
+    ? activeRepo.topics
+    : fallbackTopics;
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1.1fr_0.6fr]">
@@ -66,10 +71,7 @@ export function GithubCarousel({ repos }: GithubCarouselProps) {
         </p>
 
         <div className="mt-8 flex flex-wrap gap-2">
-          {(activeRepo.topics.length
-            ? activeRepo.topics
-            : ["rawlab", "frontend"]
-          ).map((topic) => (
+          {repoTopics.map((topic) => (
             <span
               key={topic}
               className="rounded-full border border-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-slate-400"
@@ -78,6 +80,7 @@ export function GithubCarousel({ repos }: GithubCarouselProps) {
             </span>
           ))}
         </div>
+
         <RepoSignalGraph
           name={activeRepo.name}
           language={activeRepo.language}
@@ -114,6 +117,19 @@ export function GithubCarousel({ repos }: GithubCarouselProps) {
               {formatDate(activeRepo.updatedAt)}
             </p>
           </div>
+        </div>
+
+        <div className="mt-6 flex flex-wrap gap-2">
+          {[activeRepo.language, "System Design", "Creative Engineering", "RAWLAB_"]
+            .filter(Boolean)
+            .map((signal) => (
+              <span
+                key={signal}
+                className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-2 text-[10px] uppercase tracking-[0.25em] text-slate-400"
+              >
+                {signal}
+              </span>
+            ))}
         </div>
 
         <a

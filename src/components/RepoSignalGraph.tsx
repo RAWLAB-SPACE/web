@@ -44,10 +44,12 @@ export function RepoSignalGraph({
             {values.map((value, index) => (
               <span
                 key={index}
-                className="flex-1 rounded-full bg-violet-300/40 transition hover:bg-violet-300"
+                className="repo-bar flex-1 rounded-full bg-violet-300/40"
                 style={{
                   height: `${24 + value * 76}%`,
                   opacity: 0.35 + value * 0.65,
+                  animationDelay: `${index * 0.12}s`,
+                  animationDuration: `${3 + value * 3}s`,
                 }}
               />
             ))}
@@ -59,13 +61,15 @@ export function RepoSignalGraph({
             {values.map((value, index) => (
               <span
                 key={index}
-                className="absolute rounded-full border border-violet-300/30 bg-violet-300/10"
+                className="repo-node absolute rounded-full border border-violet-300/30 bg-violet-300/10"
                 style={{
                   width: `${18 + value * 52}px`,
                   height: `${18 + value * 52}px`,
                   left: `${(index / values.length) * 90}%`,
                   top: `${value * 65}%`,
                   opacity: 0.35 + value * 0.6,
+                  animationDelay: `${index * 0.16}s`,
+                  animationDuration: `${4 + value * 4}s`,
                 }}
               />
             ))}
@@ -77,10 +81,12 @@ export function RepoSignalGraph({
             {values.map((value, index) => (
               <span
                 key={index}
-                className="rounded-2xl border border-white/10 bg-white/[0.04]"
+                className="repo-cell rounded-2xl border border-white/10 bg-white/[0.04]"
                 style={{
                   opacity: 0.35 + value * 0.65,
                   transform: `scale(${0.7 + value * 0.4})`,
+                  animationDelay: `${index * 0.09}s`,
+                  animationDuration: `${3.5 + value * 3}s`,
                 }}
               />
             ))}
@@ -91,9 +97,11 @@ export function RepoSignalGraph({
           {values.slice(0, 8).map((value, index) => (
             <span
               key={index}
-              className="h-1 flex-1 rounded-full bg-violet-300/30"
+              className="repo-pulse-line h-1 flex-1 rounded-full bg-violet-300/30"
               style={{
                 opacity: 0.25 + value * 0.75,
+                animationDelay: `${index * 0.18}s`,
+                animationDuration: `${2.8 + value * 2}s`,
               }}
             />
           ))}

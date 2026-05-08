@@ -9,6 +9,8 @@
   --accent: #c4b5fd;
   --glow-primary: rgba(139, 92, 246, 0.16);
   --glow-secondary: rgba(56, 189, 248, 0.12);
+  --star-color: rgba(226, 232, 240, 0.9);
+  --star-glow: rgba(196, 181, 253, 0.45);
 }
 
 [data-theme="light"] {
@@ -20,13 +22,6 @@
   --accent: #6d28d9;
   --glow-primary: rgba(148, 163, 184, 0.32);
   --glow-secondary: rgba(139, 92, 246, 0.12);
-}
-:root {
-  --star-color: rgba(226, 232, 240, 0.9);
-  --star-glow: rgba(196, 181, 253, 0.45);
-}
-
-[data-theme="light"] {
   --star-color: rgba(15, 23, 42, 0.28);
   --star-glow: rgba(109, 40, 217, 0.18);
 }
@@ -43,19 +38,21 @@ body {
   background: var(--background);
   color: var(--foreground);
   overflow-x: hidden;
-  transition: background 0.5s ease, color 0.5s ease;
+  transition:
+    background 0.5s ease,
+    color 0.5s ease;
 }
+
 body,
 a,
-button,
-article {
+button {
   transition:
     background-color 0.4s ease,
     border-color 0.4s ease,
     color 0.4s ease,
-    box-shadow 0.4s ease,
-    transform 0.3s ease;
+    box-shadow 0.4s ease;
 }
+
 .raw-star {
   background: var(--star-color);
   box-shadow: 0 0 14px var(--star-glow);
@@ -104,6 +101,79 @@ article {
     opacity: 0;
   }
 }
-html {
-  scroll-behavior: smooth;
+
+.repo-bar {
+  animation-name: repo-bar-flow;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  transform-origin: bottom;
+}
+
+@keyframes repo-bar-flow {
+  0%,
+  100% {
+    transform: scaleY(0.82);
+    filter: brightness(0.9);
+  }
+
+  50% {
+    transform: scaleY(1.08);
+    filter: brightness(1.4);
+  }
+}
+
+.repo-node {
+  animation-name: repo-node-drift;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes repo-node-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: brightness(0.9);
+  }
+
+  50% {
+    transform: translate3d(6px, -8px, 0) scale(1.08);
+    filter: brightness(1.45);
+  }
+}
+
+.repo-cell {
+  animation-name: repo-cell-breathe;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes repo-cell-breathe {
+  0%,
+  100% {
+    filter: brightness(0.8);
+  }
+
+  50% {
+    filter: brightness(1.45);
+  }
+}
+
+.repo-pulse-line {
+  animation-name: repo-line-flow;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  transform-origin: left;
+}
+
+@keyframes repo-line-flow {
+  0%,
+  100% {
+    transform: scaleX(0.6);
+    filter: brightness(0.8);
+  }
+
+  50% {
+    transform: scaleX(1);
+    filter: brightness(1.5);
+  }
 }

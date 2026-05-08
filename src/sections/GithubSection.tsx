@@ -1,24 +1,26 @@
-import { GithubCarousel } from "@/components/GithubCarousel";
-import { getGithubRepos } from "@/lib/github";
+"use client";
 
-export async function GithubSection() {
-  const repos = await getGithubRepos();
+import { GithubCarousel } from "@/components/GithubCarousel";
+import type { GithubRepo } from "@/lib/github";
+import { useLanguage } from "@/context/LanguageContext";
+
+export function GithubSection({ repos }: { repos: GithubRepo[] }) {
+  const { t } = useLanguage();
 
   return (
     <section id="github" className="px-6 py-32">
       <div className="mx-auto max-w-6xl">
         <div className="mb-14 max-w-3xl">
           <p className="text-sm uppercase tracking-[0.4em] text-violet-300">
-            GitHub activity
+            {t.github.eyebrow}
           </p>
 
           <h2 className="mt-6 text-4xl font-black tracking-tight md:text-6xl">
-            Real systems. Real repositories.
+            {t.github.title}
           </h2>
 
           <p className="mt-6 text-sm leading-7 text-slate-400">
-            RAWLAB_ documents the technical layer through repositories, language
-            signals, experiments, commits and systems in progress.
+            {t.github.description}
           </p>
         </div>
 

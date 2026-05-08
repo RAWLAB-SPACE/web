@@ -1,77 +1,51 @@
-const documents = [
-  {
-    label: "CV",
-    title: "Professional Resume",
-    description: "Frontend, mobile, design systems and product experience.",
-    status: "Public",
-  },
-  {
-    label: "Profile",
-    title: "Technical Profile",
-    description: "Stack, architecture, projects, cloud and engineering notes.",
-    status: "Public",
-  },
-  {
-    label: "Case Studies",
-    title: "Selected Work",
-    description: "Product decisions, UI systems, mobile flows and outcomes.",
-    status: "Private",
-  },
-  {
-    label: "Archive",
-    title: "Creative Documents",
-    description: "Visual process, experiments, decks and RAWLAB_ material.",
-    status: "Private",
-  },
-];
+import { documents } from "@/content/documents";
 
 export function DocumentsSection() {
   return (
     <section id="documents" className="px-6 py-32">
       <div className="mx-auto max-w-6xl">
-        <div className="mb-14 max-w-3xl">
+        <div className="mb-14 grid gap-8 md:grid-cols-[0.7fr_1.3fr]">
           <p className="text-sm uppercase tracking-[0.4em] text-violet-300">
             Documents / Access layer
           </p>
 
-          <h2 className="mt-6 text-4xl font-black tracking-tight md:text-6xl">
-            Public identity and private depth.
-          </h2>
+          <div>
+            <h2 className="text-4xl font-black tracking-tight md:text-6xl">
+              Public identity and private depth.
+            </h2>
 
-          <p className="mt-6 text-sm leading-7 text-slate-400">
-            A future access system for recruiters, clients and collaborators:
-            public documents, protected case studies and selected creative files.
-          </p>
+            <p className="mt-6 max-w-2xl text-sm leading-7 text-slate-400">
+              A future access system for recruiters, clients and collaborators:
+              public documents, protected case studies and selected creative files.
+            </p>
+          </div>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03]">
+          <div className="border-b border-white/10 px-6 py-4 text-xs uppercase tracking-[0.3em] text-slate-500">
+            /rawlab_access
+          </div>
+
           {documents.map((doc) => (
-            <article
+            <div
               key={doc.title}
-              className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-7 transition hover:-translate-y-1 hover:border-violet-300/50 hover:bg-white/[0.06]"
+              className="grid gap-4 border-b border-white/10 px-6 py-6 last:border-b-0 md:grid-cols-[0.4fr_1fr_0.3fr]"
             >
-              <div className="flex items-start justify-between gap-6">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.35em] text-violet-300">
-                    {doc.label}
-                  </p>
-
-                  <h3 className="mt-5 text-2xl font-semibold">{doc.title}</h3>
-                </div>
-
-                <span className="rounded-full border border-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-slate-400">
-                  {doc.status}
-                </span>
-              </div>
-
-              <p className="mt-4 max-w-xl text-sm leading-7 text-slate-400">
-                {doc.description}
+              <p className="text-xs uppercase tracking-[0.3em] text-violet-300">
+                /{doc.label.toLowerCase()}
               </p>
 
-              <button className="mt-8 rounded-full border border-white/10 px-5 py-3 text-xs uppercase tracking-[0.25em] text-slate-300 transition group-hover:border-violet-300/50 group-hover:text-violet-300">
-                {doc.status === "Public" ? "Download" : "Request access"}
+              <div>
+                <h3 className="text-xl font-semibold">{doc.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-400">
+                  {doc.description}
+                </p>
+              </div>
+
+              <button className="self-start rounded-full border border-white/10 px-4 py-2 text-xs uppercase tracking-[0.2em] text-slate-300 transition hover:border-violet-300/50 hover:text-violet-300 md:justify-self-end">
+                {doc.action}
               </button>
-            </article>
+            </div>
           ))}
         </div>
       </div>

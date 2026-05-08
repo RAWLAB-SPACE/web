@@ -14,7 +14,9 @@ import { DocumentsSection } from "@/sections/DocumentsSection";
 import { VisualArchiveSection } from "@/sections/VisualArchiveSection";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { ScrollProgress } from "@/components/ScrollProgress";
-import { GithubSection } from "@/sections/GithubSection";
+import { GithubSectionServer } from "@/sections/GithubSectionServer";
+import { RawlogSection } from "@/sections/RawlogSection";
+import { InstagramSignalSectionServer } from "@/sections/InstagramSignalSectionServer";
 
 export default function Home() {
   return (
@@ -36,12 +38,14 @@ export default function Home() {
           <AreasSection />
           <CurrentStateSection />
           <ProjectsPreviewSection />
-          <GithubSection />
+          <GithubSectionServer />
+          <RawlogSection />
           <LivingArchiveSection />
           <VisualArchiveSection />
           <ConnectedSignalsSection />
+          <InstagramSignalSectionServer />
           <DocumentsSection />
-          <ManifestoSection />
+          <ManifestoSection />    
           <Footer />
         </div>
       </LanguageProvider>
