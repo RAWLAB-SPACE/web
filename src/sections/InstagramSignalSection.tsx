@@ -5,6 +5,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { X, ExternalLink } from "lucide-react";
 import type { InstagramFragment } from "@/lib/instagram";
+import { useLanguage } from "@/context/LanguageContext";
 
 type InstagramSignalSectionProps = {
   fragments: InstagramFragment[];
@@ -16,21 +17,22 @@ export function InstagramSignalSection({
   const [activeFragment, setActiveFragment] =
     useState<InstagramFragment | null>(null);
 
+  const { t } = useLanguage();
+
   return (
     <section id="instagram" className="px-6 py-32">
       <div className="mx-auto max-w-7xl">
         <div className="mb-20 max-w-3xl">
           <p className="text-sm uppercase tracking-[0.4em] text-violet-300">
-            Instagram signal
+            {t.instagram.eyebrow}
           </p>
 
           <h2 className="mt-6 text-4xl font-black tracking-tight md:text-7xl">
-            Social fragments reinterpreted as atmosphere.
+            {t.instagram.title}
           </h2>
 
           <p className="mt-6 text-sm leading-7 text-slate-400">
-            Not a traditional feed. More like a living visual wall connected to
-            movement, photography, climbing and process.
+            {t.instagram.description}
           </p>
         </div>
 
@@ -112,7 +114,9 @@ export function InstagramSignalSection({
 
                 <div className="absolute bottom-0 left-0 p-6">
                   <p className="text-[10px] uppercase tracking-[0.35em] text-violet-300">
-                    {item.source === "instagram" ? "LIVE" : "SIGNAL"}
+                    {item.source === "instagram"
+                      ? t.instagram.live
+                      : t.instagram.signal}
                   </p>
 
                   <h3 className="mt-3 text-2xl font-semibold text-white">
@@ -120,7 +124,7 @@ export function InstagramSignalSection({
                   </h3>
 
                   <p className="mt-4 text-[10px] uppercase tracking-[0.25em] text-slate-300 opacity-0 transition group-hover:opacity-100">
-                    Open fragment
+                    {t.instagram.open}
                   </p>
                 </div>
 
@@ -161,8 +165,8 @@ export function InstagramSignalSection({
               <div>
                 <p className="text-xs uppercase tracking-[0.35em] text-violet-300">
                   {activeFragment.source === "instagram"
-                    ? "Live Instagram"
-                    : "Curated signal"}
+                    ? t.instagram.liveInstagram
+                    : t.instagram.curatedSignal}
                 </p>
 
                 <h3 className="mt-8 text-4xl font-black tracking-tight text-white md:text-6xl">
@@ -170,9 +174,7 @@ export function InstagramSignalSection({
                 </h3>
 
                 <p className="mt-8 text-sm leading-7 text-slate-300">
-                  This fragment belongs to the RAWLAB_ visual system: movement,
-                  social signals, photography and process, reinterpreted as
-                  atmosphere.
+                  {t.instagram.fragmentDescription}
                 </p>
               </div>
 

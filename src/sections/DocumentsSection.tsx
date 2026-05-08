@@ -1,29 +1,33 @@
+"use client";
+
 import { documents } from "@/content/documents";
+import { useLanguage } from "@/context/LanguageContext";
 
 export function DocumentsSection() {
+  const { t } = useLanguage();
+
   return (
     <section id="documents" className="px-6 py-32">
       <div className="mx-auto max-w-6xl">
         <div className="mb-14 grid gap-8 md:grid-cols-[0.7fr_1.3fr]">
           <p className="text-sm uppercase tracking-[0.4em] text-violet-300">
-            Documents / Access layer
+            {t.documents.eyebrow}
           </p>
 
           <div>
             <h2 className="text-4xl font-black tracking-tight md:text-6xl">
-              Public identity and private depth.
+              {t.documents.title}
             </h2>
 
             <p className="mt-6 max-w-2xl text-sm leading-7 text-slate-400">
-              A future access system for recruiters, clients and collaborators:
-              public documents, protected case studies and selected creative files.
+              {t.documents.description}
             </p>
           </div>
         </div>
 
         <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03]">
           <div className="border-b border-white/10 px-6 py-4 text-xs uppercase tracking-[0.3em] text-slate-500">
-            /rawlab_access
+            {t.documents.root}
           </div>
 
           {documents.map((doc) => (

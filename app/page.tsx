@@ -17,17 +17,19 @@ import { ScrollProgress } from "@/components/ScrollProgress";
 import { GithubSectionServer } from "@/sections/GithubSectionServer";
 import { RawlogSection } from "@/sections/RawlogSection";
 import { InstagramSignalSectionServer } from "@/sections/InstagramSignalSectionServer";
+import { SignalNoise } from "@/components/SignalNoise";
 
 export default function Home() {
   return (
     <main
-      className="min-h-screen transition-colors duration-500"
+      className="min-h-screen raw-scanlines transition-colors duration-500"
       style={{
         background: "var(--background)",
         color: "var(--foreground)",
       }}
     >
       <AmbientBackground />
+      <SignalNoise />
       <StarfieldBackground />
       <CursorGlow />
       <LanguageProvider>
@@ -45,7 +47,7 @@ export default function Home() {
           <ConnectedSignalsSection />
           <InstagramSignalSectionServer />
           <DocumentsSection />
-          <ManifestoSection />    
+          <ManifestoSection />
           <Footer />
         </div>
       </LanguageProvider>
