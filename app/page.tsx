@@ -13,6 +13,7 @@ import { CursorGlow } from "@/components/CursorGlow";
 import { DocumentsSection } from "@/sections/DocumentsSection";
 import { VisualArchiveSection } from "@/sections/VisualArchiveSection";
 import { LanguageProvider } from "@/context/LanguageContext";
+import { ScrollProgress } from "@/components/ScrollProgress";
 
 export default function Home() {
   return (
@@ -27,20 +28,21 @@ export default function Home() {
       <StarfieldBackground />
       <CursorGlow />
       <LanguageProvider>
-      <div className="relative z-10">
-        <Navigation />
-        <HeroSection />
-        <AreasSection />
-        <CurrentStateSection />
-        <ProjectsPreviewSection />
-        <LivingArchiveSection />
-        <VisualArchiveSection />
-        <ConnectedSignalsSection />
-        <DocumentsSection />
-        <ManifestoSection />
-        
-        <Footer />
-      </div>
+        <div className="relative z-10">
+          <ScrollProgress />
+          <Navigation />
+          <HeroSection />
+          <AreasSection />
+          <CurrentStateSection />
+          <ProjectsPreviewSection />
+          <LivingArchiveSection />
+          <VisualArchiveSection />
+          <ConnectedSignalsSection />
+          <DocumentsSection />
+          <ManifestoSection />
+
+          <Footer />
+        </div>
       </LanguageProvider>
     </main>
   );
