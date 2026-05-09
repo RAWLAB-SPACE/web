@@ -1,13 +1,15 @@
 "use client";
 
 import { useLanguage } from "@/context/LanguageContext";
+import { SectionAtmosphere } from "@/components/SectionAtmosphere";
 
 export function ManifestoSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="px-6 py-32">
-      <div className="mx-auto max-w-6xl">
+    <section id="manifesto" className="px-6 py-32">
+      <SectionAtmosphere variant="neutral" position="center"/>
+      <div className="mx-auto z-10 max-w-6xl">
         <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-8 md:p-14">
           <p className="text-sm uppercase tracking-[0.4em] text-violet-300">
             {t.manifesto.eyebrow}

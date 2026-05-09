@@ -8,7 +8,7 @@ export function HeroSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden px-6 pt-32">
+    <section id="hero" className="relative flex min-h-screen items-center overflow-hidden px-6 pt-32">
       <div
         className="
           absolute inset-0

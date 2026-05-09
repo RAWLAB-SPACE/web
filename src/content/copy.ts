@@ -76,6 +76,27 @@ export const copy = {
       instagram: "Instagram",
       note: "Built as a living creative system.",
     },
+    projects: {
+      eyebrow: "Projects preview",
+      title: "A map of what RAWLAB_ can become.",
+      description:
+        "Technical, visual and creative systems documented as living case studies.",
+      open: "Open case study →",
+      systemPreview: "System preview",
+      futureCapture: "Future visual capture",
+      timeline: "Timeline",
+      research: "Research & architecture",
+      designLayer: "Design system layer",
+      production: "Production integration",
+      signal: "Signal",
+      signalText:
+        "RAWLAB_ projects evolve as connected systems rather than isolated products.",
+      layer: "Layer",
+      creativeSystem: "Creative system",
+      status: "Status",
+      inProgress: "In progress",
+      atmosphere: "Atmosphere",
+    },
   },
 
   es: {
@@ -151,6 +172,27 @@ export const copy = {
       linkedin: "LinkedIn",
       instagram: "Instagram",
       note: "Construido como un sistema creativo vivo.",
+    },
+    projects: {
+      eyebrow: "Vista de proyectos",
+      title: "Un mapa de lo que RAWLAB_ puede llegar a ser.",
+      description:
+        "Sistemas técnicos, visuales y creativos documentados como casos vivos.",
+      open: "Abrir caso →",
+      systemPreview: "Vista del sistema",
+      futureCapture: "Captura visual futura",
+      timeline: "Línea de tiempo",
+      research: "Investigación y arquitectura",
+      designLayer: "Capa de sistema de diseño",
+      production: "Integración productiva",
+      signal: "Señal",
+      signalText:
+        "Los proyectos RAWLAB_ evolucionan como sistemas conectados, no como productos aislados.",
+      layer: "Capa",
+      creativeSystem: "Sistema creativo",
+      status: "Estado",
+      inProgress: "En progreso",
+      atmosphere: "Atmósfera",
     },
   },
 };

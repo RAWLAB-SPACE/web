@@ -2,13 +2,15 @@
 
 import { documents } from "@/content/documents";
 import { useLanguage } from "@/context/LanguageContext";
+import { SectionAtmosphere } from "@/components/SectionAtmosphere";
 
 export function DocumentsSection() {
   const { t } = useLanguage();
 
   return (
     <section id="documents" className="px-6 py-32">
-      <div className="mx-auto max-w-6xl">
+      <SectionAtmosphere variant="emerald"  position="right"/>
+      <div className="mx-auto z-10 max-w-6xl">
         <div className="mb-14 grid gap-8 md:grid-cols-[0.7fr_1.3fr]">
           <p className="text-sm uppercase tracking-[0.4em] text-violet-300">
             {t.documents.eyebrow}

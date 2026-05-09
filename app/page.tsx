@@ -18,6 +18,7 @@ import { GithubSectionServer } from "@/sections/GithubSectionServer";
 import { RawlogSection } from "@/sections/RawlogSection";
 import { InstagramSignalSectionServer } from "@/sections/InstagramSignalSectionServer";
 import { SignalNoise } from "@/components/SignalNoise";
+import { SectionIndicator } from "@/components/SectionIndicator";
 
 export default function Home() {
   return (
@@ -32,6 +33,7 @@ export default function Home() {
       <SignalNoise />
       <StarfieldBackground />
       <CursorGlow />
+      <SectionIndicator />
       <LanguageProvider>
         <div className="relative z-10">
           <ScrollProgress />

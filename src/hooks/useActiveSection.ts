@@ -3,33 +3,35 @@
 import { useEffect, useState } from "react";
 
 const sectionIds = [
+  "hero",
   "projects-preview",
   "visual-archive",
-  "signals",
+  "github",
+  "instagram",
+  "documents",
+  "manifesto",
 ];
 
 export function useActiveSection() {
-  const [activeSection, setActiveSection] = useState("");
+  const [activeSection, setActiveSection] = useState("hero");
 
   useEffect(() => {
     function handleScroll() {
-      const scrollPosition = window.scrollY + 180;
+      let current = "hero";
 
-      for (const id of sectionIds) {
+      sectionIds.forEach((id) => {
         const section = document.getElementById(id);
 
-        if (!section) continue;
+        if (!section) return;
 
-        const offsetTop = section.offsetTop;
-        const height = section.offsetHeight;
+        const rect = section.getBoundingClientRect();
 
-        if (
-          scrollPosition >= offsetTop &&
-          scrollPosition < offsetTop + height
-        ) {
-          setActiveSection(id);
+        if (rect.top <= window.innerHeight * 0.4) {
+          current = id;
         }
-      }
+      });
+
+      setActiveSection(current);
     }
 
     handleScroll();
