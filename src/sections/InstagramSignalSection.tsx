@@ -133,7 +133,7 @@ export function InstagramSignalSection({
         </div>
 
         {stories.length > 0 && (
-          <div className="mb-10 overflow-x-auto pb-2">
+          <div className="mb-10 overflow-x-auto pt-6 pl-5 pb-0">
             <div className="flex min-w-max items-center gap-4">
               {stories.map((story, index) => (
                 <motion.button
