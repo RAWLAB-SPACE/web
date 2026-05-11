@@ -19,10 +19,12 @@ import { RawlogSection } from "@/sections/RawlogSection";
 import { InstagramSignalSectionServer } from "@/sections/InstagramSignalSectionServer";
 import { SignalNoise } from "@/components/SignalNoise";
 import { SectionIndicator } from "@/components/SectionIndicator";
+import { BootLoader } from "@/components/system/BootLoader";
 
 export const dynamic = "force-dynamic";
 
 export default function Home() {
+  <BootLoader />
   return (
     <main
       className="min-h-screen raw-scanlines transition-colors duration-500"
