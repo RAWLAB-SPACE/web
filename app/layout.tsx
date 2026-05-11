@@ -16,48 +16,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://web-raus-projects.vercel.app"),
+
   title: "RAWLAB_",
-  description: "Movement, code, design and human experiences.",
 
-  keywords: [
-    "Frontend Developer",
-    "React",
-    "React Native",
-    "Creative Developer",
-    "Portfolio",
-    "RAWLAB",
-    "Design Engineer",
-    "Motion Design",
-    "Interactive Experience",
-    "Climbing",
-    "Digital Archive",
-  ],
-
-  authors: [
-    {
-      name: "Raúl Ruiz",
-    },
-  ],
-
-  creator: "Raúl Ruiz",
+  description:
+    "RAWLAB_ is a digital archive of movement, climbing, design systems, frontend engineering, visual experimentation and human-centered interactive experiences.",
 
   openGraph: {
     title: "RAWLAB_",
     description:
       "Movement, code, design and human experiences.",
-    url: "https://rawlab-space.vercel.app",
+    url: "https://web-raus-projects.vercel.app",
     siteName: "RAWLAB_",
-    locale: "en_US",
-    type: "website",
-
     images: [
       {
-        url: "/og-cover.jpg",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "RAWLAB_",
       },
     ],
+    locale: "en_US",
+    type: "website",
   },
 
   twitter: {
@@ -65,9 +45,14 @@ export const metadata: Metadata = {
     title: "RAWLAB_",
     description:
       "Movement, code, design and human experiences.",
-    images: ["/opengraph-image"]
+    images: ["/opengraph-image"],
   },
 
+  icons: {
+    icon: "/icon",
+    shortcut: "/icon",
+    apple: "/icon",
+  },
 };
 
 export default function RootLayout({
