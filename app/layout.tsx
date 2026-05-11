@@ -65,12 +65,9 @@ export const metadata: Metadata = {
     title: "RAWLAB_",
     description:
       "Movement, code, design and human experiences.",
-    images: ["/og-cover.jpg"],
+    images: ["/opengraph-image"]
   },
 
-  icons: {
-    icon: "/favicon.ico",
-  },
 };
 
 export default function RootLayout({
