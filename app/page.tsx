@@ -20,6 +20,8 @@ import { InstagramSignalSectionServer } from "@/sections/InstagramSignalSectionS
 import { SignalNoise } from "@/components/SignalNoise";
 import { SectionIndicator } from "@/components/SectionIndicator";
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   return (
     <main
