@@ -5,6 +5,19 @@ export const dynamic = "force-dynamic";
 const ACCESS_TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN;
 const USER_ID = process.env.INSTAGRAM_USER_ID;
 
+async function readJson(response: Response) {
+  try {
+    return await response.json();
+  } catch {
+    return {
+      error: {
+        message: "Unable to parse Instagram response.",
+        status: response.status,
+      },
+    };
+  }
+}
+
 export async function GET() {
   if (!ACCESS_TOKEN || !USER_ID) {
     return NextResponse.json({
@@ -20,34 +33,67 @@ export async function GET() {
 
   const storiesUrl = `https://graph.instagram.com/${USER_ID}/stories?fields=id,media_type,media_url,permalink,thumbnail_url,timestamp&access_token=${ACCESS_TOKEN}`;
 
-  const [profileResponse, mediaResponse, storiesResponse] = await Promise.all([
-    fetch(profileUrl, {
-      cache: "no-store",
-    }),
+  try {
+    const [profileResponse, mediaResponse, storiesResponse] =
+      await Promise.all([
+        fetch(profileUrl, {
+          cache: "no-store",
+        }),
 
-    fetch(mediaUrl, {
-      cache: "no-store",
-    }),
+        fetch(mediaUrl, {
+          cache: "no-store",
+        }),
 
-    fetch(storiesUrl, {
-      cache: "no-store",
-    }),
-  ]);
+        fetch(storiesUrl, {
+          cache: "no-store",
+        }),
+      ]);
 
-  const profile = await profileResponse.json();
-  const media = await mediaResponse.json();
-  const stories = await storiesResponse.json();
+    const [profile, media, stories] = await Promise.all([
+      readJson(profileResponse),
+      readJson(mediaResponse),
+      readJson(storiesResponse),
+    ]);
 
-  return NextResponse.json({
-    connected: true,
-    source: "instagram",
-    profile,
-    data: media.data || [],
-    stories: stories.data || [],
-    debug: {
-      profileError: profile.error || null,
-      mediaError: media.error || null,
-      storiesError: stories.error || null,
-    },
-  });
+    return NextResponse.json({
+      connected: true,
+      source: "instagram",
+
+      profile: profile.error ? null : profile,
+
+      data: media.data || [],
+
+      stories: stories.data || [],
+
+      meta: {
+        hasStories: Boolean(stories.data?.length),
+        storiesCount: stories.data?.length || 0,
+        mediaCount: media.data?.length || 0,
+        profileStatus: profileResponse.status,
+        mediaStatus: mediaResponse.status,
+        storiesStatus: storiesResponse.status,
+      },
+
+      debug: {
+        profileError: profile.error || null,
+        mediaError: media.error || null,
+        storiesError: stories.error || null,
+      },
+    });
+  } catch (error) {
+    return NextResponse.json(
+      {
+        connected: false,
+        source: "instagram",
+        message: "Instagram API request failed.",
+        error:
+          error instanceof Error
+            ? error.message
+            : "Unknown Instagram API error.",
+      },
+      {
+        status: 500,
+      },
+    );
+  }
 }
