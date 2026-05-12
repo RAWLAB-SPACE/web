@@ -8,6 +8,7 @@ export function useSignalDeck(fragments: InstagramFragment[]) {
   const [activeFragment, setActiveFragment] =
     useState<InstagramFragment | null>(null);
   const [activeChildImage, setActiveChildImage] = useState<string | null>(null);
+  const [isPaused, setIsPaused] = useState(false);
 
   const activeItem = fragments[activeIndex] ?? fragments[0];
 
@@ -28,7 +29,7 @@ export function useSignalDeck(fragments: InstagramFragment[]) {
   }, [activeIndex, fragments]);
 
   useEffect(() => {
-    if (!fragments.length || activeFragment) return;
+    if (!fragments.length || activeFragment || isPaused) return;
 
     const interval = window.setInterval(() => {
       setActiveIndex((current) =>
@@ -37,7 +38,7 @@ export function useSignalDeck(fragments: InstagramFragment[]) {
     }, 4200);
 
     return () => window.clearInterval(interval);
-  }, [fragments.length, activeFragment]);
+  }, [fragments.length, activeFragment, isPaused]);
 
   function openFragment(fragment: InstagramFragment) {
     setActiveFragment(fragment);
@@ -57,6 +58,7 @@ export function useSignalDeck(fragments: InstagramFragment[]) {
     visibleStack,
     setActiveIndex,
     setActiveChildImage,
+    setIsPaused,
     openFragment,
     closeFragment,
   };

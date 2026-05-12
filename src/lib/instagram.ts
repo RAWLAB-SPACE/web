@@ -33,6 +33,7 @@ export type InstagramFragment = {
 
   children?: InstagramChild[];
   comments?: InstagramComment[];
+  videoUrl?: string;
 };
 
 type InstagramApiItem = {
@@ -175,6 +176,8 @@ export async function getInstagramFeed(): Promise<{
         children: item.children?.data || [],
 
         comments: item.comments?.data || [],
+
+        videoUrl: item.media_type === "VIDEO" ? item.media_url : undefined,
       })) || [];
 
     const stories: InstagramFragment[] =

@@ -2,11 +2,14 @@
 
 import type { InstagramFragment, InstagramProfile } from "@/lib/instagram";
 import { useLanguage } from "@/context/LanguageContext";
+
 import { SignalStories } from "@/components/signal/SignalStories";
 import { SignalProfile } from "@/components/signal/SignalProfile";
 import { SignalModal } from "@/components/signal/SignalModal";
 import { SignalDeck } from "@/components/signal/SignalDeck";
+
 import { modalStars } from "@/components/signal/signalStars";
+
 import { useSignalDeck } from "@/hooks/useSignalDeck";
 
 type InstagramSignalSectionProps = {
@@ -32,6 +35,7 @@ export function InstagramSignalSection({
     setActiveChildImage,
     openFragment,
     closeFragment,
+    setIsPaused,
   } = useSignalDeck(fragments);
 
   if (!activeItem) return null;
@@ -76,6 +80,7 @@ export function InstagramSignalSection({
             openLabel={t.instagram.open}
             onSelectIndex={setActiveIndex}
             onOpenFragment={openFragment}
+            onPauseChange={setIsPaused}
           />
         </div>
       </div>

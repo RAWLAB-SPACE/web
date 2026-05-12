@@ -17,6 +17,7 @@ type SignalDeckProps = {
   openLabel: string;
   onSelectIndex: (index: number) => void;
   onOpenFragment: (fragment: InstagramFragment) => void;
+  onPauseChange?: (paused: boolean) => void;
 };
 
 export function SignalDeck({
@@ -29,9 +30,14 @@ export function SignalDeck({
   openLabel,
   onSelectIndex,
   onOpenFragment,
+  onPauseChange,
 }: SignalDeckProps) {
   return (
-    <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl">
+    <div
+      onMouseEnter={() => onPauseChange?.(true)}
+      onMouseLeave={() => onPauseChange?.(false)}
+      className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl"
+    >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(217,70,239,0.14),transparent_55%)]" />
       <div className="absolute inset-0 opacity-20 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] bg-[size:56px_56px]" />
 
@@ -78,14 +84,7 @@ export function SignalDeck({
                     alt={item.title}
                     fill
                     sizes="320px"
-                    className={`
-                      object-cover transition duration-[1800ms]
-                      ${
-                        item.type === "reel"
-                          ? "scale-[1.12] group-hover:scale-[1.18]"
-                          : "scale-[1.08] group-hover:scale-[1.12]"
-                      }
-                    `}
+                    className="object-cover scale-[1.1]"
                   />
                 </div>
 
@@ -111,9 +110,17 @@ export function SignalDeck({
                   </span>
 
                   {item.type === "reel" && (
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/40 backdrop-blur-md">
+                    <motion.div
+                      animate={{ scale: [1, 1.08, 1] }}
+                      transition={{
+                        duration: 1.8,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/40 backdrop-blur-md"
+                    >
                       <div className="ml-[2px] h-0 w-0 border-b-[7px] border-l-[11px] border-t-[7px] border-b-transparent border-l-white border-t-transparent" />
-                    </div>
+                    </motion.div>
                   )}
                 </div>
 
@@ -128,7 +135,10 @@ export function SignalDeck({
 
                   {item.children && item.children.length > 0 && (
                     <div className="mt-4 flex gap-1">
-                      {[item.image, ...item.children.map((child) => child.media_url)]
+                      {[
+                        item.image,
+                        ...item.children.map((child) => child.media_url),
+                      ]
                         .filter(Boolean)
                         .slice(0, 6)
                         .map((_, dotIndex) => (

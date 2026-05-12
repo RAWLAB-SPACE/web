@@ -107,28 +107,43 @@ export function SignalModal({
         className="relative z-10 grid w-full max-w-6xl overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/50 backdrop-blur-2xl md:grid-cols-[1.1fr_0.9fr]"
       >
         <div className="relative min-h-[70vh]">
-          <Image
-            src={activeChildImage || activeFragment.image}
-            alt={activeFragment.title}
-            fill
-            sizes="60vw"
-            className="object-cover"
-          />
+          {activeFragment.type === "reel" &&
+          activeFragment.videoUrl &&
+          !activeChildImage ? (
+            <video
+              src={activeFragment.videoUrl}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          ) : (
+            <Image
+              src={activeChildImage || activeFragment.image}
+              alt={activeFragment.title}
+              fill
+              sizes="60vw"
+              className="object-cover"
+            />
+          )}
 
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
 
           {activeFragment.children && activeFragment.children.length > 0 && (
             <div className="absolute bottom-5 left-5 right-5 z-10 flex gap-3 overflow-x-auto pb-1">
-              {[{ media_url: activeFragment.image, media_type: "IMAGE" }, ...activeFragment.children].map(
-                (child, index) => {
-                  const childImage =
-                    child.media_type === "VIDEO"
-                      ? child.thumbnail_url || child.media_url
-                      : child.media_url || child.thumbnail_url;
-
+              {activeFragment.children
+                .map((child) =>
+                  child.media_type === "VIDEO"
+                    ? child.thumbnail_url || child.media_url
+                    : child.media_url || child.thumbnail_url,
+                )
+                .filter(Boolean)
+                .map((childImage, index) => {
                   if (!childImage) return null;
 
-                  const active = childImage === (activeChildImage || activeFragment.image);
+                  const active =
+                    childImage === (activeChildImage || activeFragment.image);
 
                   return (
                     <button
@@ -150,8 +165,7 @@ export function SignalModal({
                       />
                     </button>
                   );
-                },
-              )}
+                })}
             </div>
           )}
         </div>
