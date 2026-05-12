@@ -57,11 +57,24 @@ export function SignalDeck({
                     onSelectIndex(index);
                   }
                 }}
+                whileHover={
+                  isActive
+                    ? {
+                        scale: 1.02,
+
+                        y: -6,
+                      }
+                    : undefined
+                }
                 animate={{
                   x: stackIndex * 14,
+
                   y: stackIndex * 12,
+
                   rotate: stackIndex * 2.5 - 4,
-                  scale: isActive ? 1 : 0.9 - stackIndex * 0.04,
+
+                  scale: isActive ? 1 : 0.94 - stackIndex * 0.03,
+
                   opacity: isActive ? 1 : 0.55 - stackIndex * 0.07,
                 }}
                 transition={{
@@ -71,23 +84,33 @@ export function SignalDeck({
                 }}
                 className={`
                   group absolute aspect-[9/13]
-                  w-[min(82%,15rem)]
-                  sm:w-[min(74%,17rem)]
-                  lg:w-[min(72%,18rem)]
-                  overflow-hidden rounded-[2rem]
-                  border-0 bg-transparent text-left
-                  shadow-2xl shadow-black/40
-                  transform-gpu
-                  ${isActive ? "z-40" : "z-20"}
-                `}
+
+    w-[min(82%,15rem)]
+
+    sm:w-[min(74%,17rem)]
+
+    lg:w-[min(72%,18rem)]
+
+    overflow-hidden rounded-[2rem]
+
+    border-0 bg-transparent text-left
+
+    shadow-2xl shadow-black/40
+
+    transform-gpu
+${
+  isActive ? "z-40 shadow-[0_0_80px_rgba(217,70,239,0.25)]" : "z-20"
+}                `}
               >
                 <div className="absolute inset-0 overflow-hidden rounded-[2rem] bg-black">
                   <Image
                     src={item.image}
                     alt={item.title}
                     fill
+                    priority={isActive}
+                    draggable={false}
                     sizes="320px"
-                    className="object-cover scale-[1.1]"
+                    className="select-none object-cover scale-[1.1]"
                   />
                 </div>
 

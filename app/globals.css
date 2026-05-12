@@ -25,6 +25,13 @@
   --star-color: rgba(15, 23, 42, 0.28);
   --star-glow: rgba(109, 40, 217, 0.18);
 }
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  overscroll-behavior-x: none;
+}
 
 *,
 *::before,

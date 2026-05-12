@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import type { CSSProperties } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
@@ -59,6 +60,23 @@ export function SignalModal({
   onClose,
   onSelectChildImage,
 }: SignalModalProps) {
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
+
   if (typeof document === "undefined") return null;
 
   return createPortal(
@@ -107,59 +125,47 @@ export function SignalModal({
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.45, ease: "easeOut" }}
         onClick={(event) => event.stopPropagation()}
-        className="
-                relative z-10
-                flex w-full flex-col
-                overflow-hidden
-                rounded-[1.25rem]
-                border border-white/10
-                bg-white/[0.04]
-                shadow-2xl shadow-black/50
-                backdrop-blur-2xl
-
-                max-h-[95vh]
-                max-w-[100vw]
-
-                md:grid
-                md:max-h-[92vh]
-                md:max-w-6xl
-                md:grid-cols-[1.1fr_0.9fr]
-                md:rounded-[2.5rem]
-                "
+        className="relative z-10 flex w-full max-w-[100vw] flex-col overflow-hidden rounded-[1.25rem] border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/50 backdrop-blur-2xl max-h-[95vh] md:grid md:max-h-[92vh] md:max-w-6xl md:grid-cols-[1.1fr_0.9fr] md:rounded-[2.5rem]"
       >
         <div className="relative h-[42vh] min-h-[18rem] w-full md:min-h-[70vh]">
           {activeFragment.type === "reel" &&
           activeFragment.videoUrl &&
           !activeChildImage ? (
             <video
+              key={activeFragment.id}
               src={activeFragment.videoUrl}
               autoPlay
               muted
               loop
               playsInline
               controls
-              className="absolute inset-0 h-full w-full object-cover"
+              draggable={false}
+              className="absolute inset-0 h-full w-full select-none object-cover"
             />
           ) : (
-            <Image
-              src={activeChildImage || activeFragment.image}
-              alt={activeFragment.title}
-              fill
-              sizes="60vw"
-              className="object-cover"
-            />
+            <motion.div
+              key={activeChildImage || activeFragment.image}
+              initial={{ opacity: 0.4, scale: 1.02 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.35 }}
+              className="absolute inset-0"
+            >
+              <Image
+                src={activeChildImage || activeFragment.image}
+                alt={activeFragment.title}
+                fill
+                priority
+                draggable={false}
+                sizes="60vw"
+                className="select-none object-cover"
+              />
+            </motion.div>
           )}
 
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
 
           {activeFragment.children && activeFragment.children.length > 0 && (
-            <div className="
-                absolute bottom-4 left-4 right-4 z-10
-                flex gap-2
-                overflow-x-auto
-                pb-2
-                scrollbar-thin
-                ">
+            <div className="absolute bottom-4 left-4 right-4 z-10 flex snap-x snap-mandatory gap-2 overflow-x-auto pb-2">
               {activeFragment.children
                 .map((child) =>
                   child.media_type === "VIDEO"
@@ -175,23 +181,24 @@ export function SignalModal({
 
                   return (
                     <button
-                        key={`${childImage}-${index}`}
-                        type="button"
-                        onClick={() => onSelectChildImage(childImage)}
-                        className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-2xl bg-black/20 ring-1 transition md:h-20 md:w-20 ${
-                          active
-                            ? "ring-violet-300/80 opacity-100"
-                            : "ring-white/10 opacity-70 hover:opacity-100 hover:ring-violet-300/40"
-                        }`}
-                      >
-                        <Image
-                          src={childImage}
-                          alt={`${activeFragment.title} ${index + 1}`}
-                          fill
-                          sizes="80px"
-                          className="object-cover"
-                        />
-                      </button>
+                      key={`${childImage}-${index}`}
+                      type="button"
+                      onClick={() => onSelectChildImage(childImage)}
+                      className={`relative h-16 w-16 shrink-0 snap-start overflow-hidden rounded-2xl bg-black/20 ring-1 transition md:h-20 md:w-20 ${
+                        active
+                          ? "opacity-100 ring-violet-300/80"
+                          : "opacity-70 ring-white/10 hover:opacity-100 hover:ring-violet-300/40"
+                      }`}
+                    >
+                      <Image
+                        src={childImage}
+                        alt={`${activeFragment.title} ${index + 1}`}
+                        fill
+                        draggable={false}
+                        sizes="80px"
+                        className="select-none object-cover"
+                      />
+                    </button>
                   );
                 })}
             </div>
@@ -199,13 +206,7 @@ export function SignalModal({
         </div>
 
         <div
-          className="
-              flex min-w-0 flex-col justify-between
-              overflow-y-auto
-              p-4
-              sm:p-5
-              md:p-10
-              "
+          className="flex min-w-0 flex-col justify-between overflow-y-auto p-4 sm:p-5 md:p-10"
           style={{ color: "var(--foreground)" }}
         >
           <div>
@@ -215,8 +216,7 @@ export function SignalModal({
                 : curatedSignalLabel}
             </p>
 
-            <h3 className="mt-5 text-[1.7rem]
-                break-words font-black tracking-tight sm:text-3xl md:mt-8 md:text-6xl">
+            <h3 className="mt-5 break-words text-[1.7rem] font-black tracking-tight sm:text-3xl md:mt-8 md:text-6xl">
               {activeFragment.title}
             </h3>
 
@@ -228,67 +228,26 @@ export function SignalModal({
             </p>
 
             <div className="mt-6 grid grid-cols-2 gap-2 sm:gap-3">
-              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                <p className="text-[10px] uppercase tracking-[0.25em] text-slate-500">
-                  Likes
-                </p>
-                <p className="mt-2 text-2xl font-semibold">
-                  {formatNumber(activeFragment.likeCount)}
-                </p>
-              </div>
+              {[
+                ["Likes", formatNumber(activeFragment.likeCount)],
+                ["Comments", formatNumber(activeFragment.commentsCount)],
+                ["Type", activeFragment.type],
+                ["Date", formatDate(activeFragment.timestamp)],
+              ].map(([label, value]) => (
+                <div
+                  key={label}
+                  className="rounded-2xl border border-white/10 bg-white/[0.03] p-4"
+                >
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-slate-500">
+                    {label}
+                  </p>
 
-              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                <p className="text-[10px] uppercase tracking-[0.25em] text-slate-500">
-                  Comments
-                </p>
-                <p className="mt-2 text-2xl font-semibold">
-                  {formatNumber(activeFragment.commentsCount)}
-                </p>
-              </div>
-
-              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                <p className="text-[10px] uppercase tracking-[0.25em] text-slate-500">
-                  Type
-                </p>
-                <p className="mt-2 text-sm font-semibold uppercase">
-                  {activeFragment.type}
-                </p>
-              </div>
-
-              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                <p className="text-[10px] uppercase tracking-[0.25em] text-slate-500">
-                  Date
-                </p>
-                <p className="mt-2 text-sm font-semibold">
-                  {formatDate(activeFragment.timestamp)}
-                </p>
-              </div>
-            </div>
-
-            {activeFragment.comments && activeFragment.comments.length > 0 && (
-              <div className="mt-8 rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5">
-                <p className="text-[10px] uppercase tracking-[0.3em] text-violet-300">
-                  Recent comments
-                </p>
-
-                <div className="mt-5 flex max-h-40 flex-col gap-4 overflow-y-auto pr-2">
-                  {activeFragment.comments.slice(0, 5).map((comment, index) => (
-                    <div key={`${comment.timestamp}-${index}`}>
-                      <p className="text-xs font-semibold">
-                        @{comment.username || "instagram_user"}
-                      </p>
-
-                      <p
-                        className="mt-1 text-sm leading-6"
-                        style={{ color: "var(--muted)" }}
-                      >
-                        {comment.text}
-                      </p>
-                    </div>
-                  ))}
+                  <p className="mt-2 text-sm font-semibold uppercase md:text-2xl md:normal-case">
+                    {value}
+                  </p>
                 </div>
-              </div>
-            )}
+              ))}
+            </div>
           </div>
 
           <div className="mt-10 flex flex-wrap gap-3">
