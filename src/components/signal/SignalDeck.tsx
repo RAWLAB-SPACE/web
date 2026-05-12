@@ -42,7 +42,7 @@ export function SignalDeck({
       <div className="absolute inset-0 opacity-20 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] bg-[size:56px_56px]" />
 
       <div className="relative z-10 grid gap-8 xl:grid-cols-[0.9fr_1.1fr]">
-        <div className="relative flex min-h-[34rem] items-center justify-center overflow-hidden rounded-[2rem] border border-white/10 bg-black/10">
+        <div className="relative flex min-h-[26rem] sm:min-h-[30rem] lg:min-h-[34rem] items-center justify-center overflow-hidden rounded-[2rem] border border-white/10 bg-black/10">
           {visibleStack.map(({ item, index }, stackIndex) => {
             const isActive = stackIndex === 0;
 
@@ -70,7 +70,10 @@ export function SignalDeck({
                   damping: 18,
                 }}
                 className={`
-                  group absolute aspect-[9/13] w-[min(72%,18rem)]
+                  group absolute aspect-[9/13]
+                  w-[min(82%,15rem)]
+                  sm:w-[min(74%,17rem)]
+                  lg:w-[min(72%,18rem)]
                   overflow-hidden rounded-[2rem]
                   border-0 bg-transparent text-left
                   shadow-2xl shadow-black/40
@@ -129,7 +132,7 @@ export function SignalDeck({
                     {item.source === "instagram" ? liveLabel : signalLabel}
                   </p>
 
-                  <h3 className="mt-3 line-clamp-3 text-2xl font-semibold text-white">
+                  <h3 className="mt-3 line-clamp-3 text-xl sm:text-2xl font-semibold text-white">
                     {item.title}
                   </h3>
 
@@ -177,7 +180,7 @@ export function SignalDeck({
               Signal deck
             </p>
 
-            <h3 className="mt-5 line-clamp-3 text-3xl font-black tracking-tight md:text-4xl">
+            <h3 className="mt-5 line-clamp-3 text-2xl sm:text-3xl md:text-4xl font-black tracking-tight">
               {activeItem.title}
             </h3>
 
@@ -187,7 +190,7 @@ export function SignalDeck({
             </p>
           </div>
 
-          <div className="mt-8 max-h-[22rem] overflow-y-auto pr-2">
+          <div className="mt-6 max-h-[18rem] sm:max-h-[22rem] overflow-y-auto pr-1 sm:pr-2">
             <div className="flex flex-col gap-3">
               {fragments.map((item, index) => {
                 const active = activeIndex === index;
