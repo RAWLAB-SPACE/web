@@ -1,6 +1,7 @@
 "use client";
 
 import type { CSSProperties } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ExternalLink, X } from "lucide-react";
@@ -58,13 +59,15 @@ export function SignalModal({
   onClose,
   onSelectChildImage,
 }: SignalModalProps) {
-  return (
+  if (typeof document === "undefined") return null;
+
+  return createPortal(
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
       onClick={onClose}
-      className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden px-6 py-10 backdrop-blur-xl"
+      className="fixed inset-0 z-[9999] flex items-start justify-center overflow-y-auto px-3 py-4 backdrop-blur-xl sm:px-4 md:items-center md:px-6 md:py-10"
       style={{
         background: "color-mix(in srgb, var(--background) 84%, black)",
       }}
@@ -92,7 +95,7 @@ export function SignalModal({
 
       <button
         onClick={onClose}
-        className="absolute right-6 top-6 z-20 rounded-full border border-white/10 bg-white/10 p-3 transition hover:bg-white/20"
+        className="absolute right-4 top-4 z-20 rounded-full border border-white/10 bg-white/10 p-3 transition hover:bg-white/20 md:right-6 md:top-6"
         style={{ color: "var(--foreground)" }}
         aria-label="Close fragment viewer"
       >
@@ -104,9 +107,27 @@ export function SignalModal({
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.45, ease: "easeOut" }}
         onClick={(event) => event.stopPropagation()}
-        className="relative z-10 grid w-full max-w-6xl overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/50 backdrop-blur-2xl md:grid-cols-[1.1fr_0.9fr]"
+        className="
+                relative z-10
+                flex w-full flex-col
+                overflow-hidden
+                rounded-[1.25rem]
+                border border-white/10
+                bg-white/[0.04]
+                shadow-2xl shadow-black/50
+                backdrop-blur-2xl
+
+                max-h-[95vh]
+                max-w-[100vw]
+
+                md:grid
+                md:max-h-[92vh]
+                md:max-w-6xl
+                md:grid-cols-[1.1fr_0.9fr]
+                md:rounded-[2.5rem]
+                "
       >
-        <div className="relative min-h-[70vh]">
+        <div className="relative h-[42vh] min-h-[18rem] w-full md:min-h-[70vh]">
           {activeFragment.type === "reel" &&
           activeFragment.videoUrl &&
           !activeChildImage ? (
@@ -116,6 +137,7 @@ export function SignalModal({
               muted
               loop
               playsInline
+              controls
               className="absolute inset-0 h-full w-full object-cover"
             />
           ) : (
@@ -131,7 +153,13 @@ export function SignalModal({
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
 
           {activeFragment.children && activeFragment.children.length > 0 && (
-            <div className="absolute bottom-5 left-5 right-5 z-10 flex gap-3 overflow-x-auto pb-1">
+            <div className="
+                absolute bottom-4 left-4 right-4 z-10
+                flex gap-2
+                overflow-x-auto
+                pb-2
+                scrollbar-thin
+                ">
               {activeFragment.children
                 .map((child) =>
                   child.media_type === "VIDEO"
@@ -147,23 +175,23 @@ export function SignalModal({
 
                   return (
                     <button
-                      key={`${childImage}-${index}`}
-                      type="button"
-                      onClick={() => onSelectChildImage(childImage)}
-                      className={`relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border bg-white/10 transition ${
-                        active
-                          ? "border-violet-300"
-                          : "border-white/20 opacity-70 hover:opacity-100"
-                      }`}
-                    >
-                      <Image
-                        src={childImage}
-                        alt={`${activeFragment.title} ${index + 1}`}
-                        fill
-                        sizes="80px"
-                        className="object-cover"
-                      />
-                    </button>
+                        key={`${childImage}-${index}`}
+                        type="button"
+                        onClick={() => onSelectChildImage(childImage)}
+                        className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-2xl bg-black/20 ring-1 transition md:h-20 md:w-20 ${
+                          active
+                            ? "ring-violet-300/80 opacity-100"
+                            : "ring-white/10 opacity-70 hover:opacity-100 hover:ring-violet-300/40"
+                        }`}
+                      >
+                        <Image
+                          src={childImage}
+                          alt={`${activeFragment.title} ${index + 1}`}
+                          fill
+                          sizes="80px"
+                          className="object-cover"
+                        />
+                      </button>
                   );
                 })}
             </div>
@@ -171,7 +199,13 @@ export function SignalModal({
         </div>
 
         <div
-          className="flex flex-col justify-between p-8 md:p-10"
+          className="
+              flex min-w-0 flex-col justify-between
+              overflow-y-auto
+              p-4
+              sm:p-5
+              md:p-10
+              "
           style={{ color: "var(--foreground)" }}
         >
           <div>
@@ -181,18 +215,19 @@ export function SignalModal({
                 : curatedSignalLabel}
             </p>
 
-            <h3 className="mt-8 text-4xl font-black tracking-tight md:text-6xl">
+            <h3 className="mt-5 text-[1.7rem]
+                break-words font-black tracking-tight sm:text-3xl md:mt-8 md:text-6xl">
               {activeFragment.title}
             </h3>
 
             <p
-              className="mt-8 text-sm leading-7"
+              className="mt-6 text-sm leading-7 md:mt-8"
               style={{ color: "var(--muted)" }}
             >
               {fragmentDescription}
             </p>
 
-            <div className="mt-8 grid grid-cols-2 gap-3">
+            <div className="mt-6 grid grid-cols-2 gap-2 sm:gap-3">
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
                 <p className="text-[10px] uppercase tracking-[0.25em] text-slate-500">
                   Likes
@@ -269,6 +304,7 @@ export function SignalModal({
               <a
                 href={activeFragment.permalink}
                 target="_blank"
+                rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-xs uppercase tracking-[0.25em] transition hover:border-violet-300/50 hover:text-violet-300"
               >
                 Instagram
@@ -278,6 +314,7 @@ export function SignalModal({
           </div>
         </div>
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body,
   );
 }

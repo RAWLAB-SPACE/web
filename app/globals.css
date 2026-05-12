@@ -26,21 +26,45 @@
   --star-glow: rgba(109, 40, 217, 0.18);
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+  min-width: 0;
 }
 
 html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
   scroll-behavior: smooth;
 }
 
 body {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  overflow-x: clip;
   background: var(--background);
   color: var(--foreground);
-  overflow-x: hidden;
   transition:
     background 0.5s ease,
     color 0.5s ease;
+}
+
+#__next,
+main {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
 }
 
 body,
@@ -93,7 +117,7 @@ button {
   }
 
   85% {
-    transform: translateX(140vw) rotate(-18deg);
+    transform: translateX(100vw) rotate(-18deg);
     opacity: 0;
   }
 
@@ -184,15 +208,13 @@ button {
   inset: 0;
   pointer-events: none;
   z-index: 3;
-
   background: repeating-linear-gradient(
     to bottom,
-    rgba(255,255,255,0.015),
-    rgba(255,255,255,0.015) 1px,
+    rgba(255, 255, 255, 0.015),
+    rgba(255, 255, 255, 0.015) 1px,
     transparent 1px,
     transparent 3px
   );
-
   opacity: 0.18;
   mix-blend-mode: soft-light;
 }

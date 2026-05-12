@@ -17,7 +17,7 @@ export function SignalStories({
 }: SignalStoriesProps) {
   return (
     <div className="mb-10 overflow-x-auto pb-2">
-      <div className="flex min-w-max items-center gap-4">
+      <div className="flex w-full min-w-0 items-center gap-3 overflow-x-auto">
         {stories.length > 0 ? (
           stories.map((story, index) => (
             <motion.button

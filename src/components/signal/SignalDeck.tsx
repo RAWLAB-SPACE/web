@@ -36,12 +36,12 @@ export function SignalDeck({
     <div
       onMouseEnter={() => onPauseChange?.(true)}
       onMouseLeave={() => onPauseChange?.(false)}
-      className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl"
+      className="relative w-full max-w-full overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] p-4 backdrop-blur-xl sm:rounded-[2.5rem] sm:p-6"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(217,70,239,0.14),transparent_55%)]" />
       <div className="absolute inset-0 opacity-20 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] bg-[size:56px_56px]" />
 
-      <div className="relative z-10 grid gap-8 xl:grid-cols-[0.9fr_1.1fr]">
+      <div className="relative z-10 flex flex-col gap-6 xl:grid xl:grid-cols-[0.9fr_1.1fr]">
         <div className="relative flex min-h-[26rem] sm:min-h-[30rem] lg:min-h-[34rem] items-center justify-center overflow-hidden rounded-[2rem] border border-white/10 bg-black/10">
           {visibleStack.map(({ item, index }, stackIndex) => {
             const isActive = stackIndex === 0;
@@ -81,7 +81,7 @@ export function SignalDeck({
                   ${isActive ? "z-40" : "z-20"}
                 `}
               >
-                <div className="absolute -inset-[6px] overflow-hidden rounded-[2.25rem]">
+                <div className="absolute inset-0 overflow-hidden rounded-[2rem] bg-black">
                   <Image
                     src={item.image}
                     alt={item.title}
@@ -91,7 +91,7 @@ export function SignalDeck({
                   />
                 </div>
 
-                <div className="absolute -inset-[6px] rounded-[2.25rem] bg-gradient-to-b from-black/5 via-black/10 to-black/80" />
+                <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-b from-black/5 via-black/10 to-black/80" />
 
                 <div className="absolute left-0 top-0 z-20 flex w-full items-start justify-between p-4">
                   <span
@@ -174,13 +174,13 @@ export function SignalDeck({
           })}
         </div>
 
-        <div className="flex min-w-0 flex-col justify-between">
+        <div className="flex min-w-0 flex-col justify-between overflow-hidden">
           <div>
             <p className="text-[10px] uppercase tracking-[0.35em] text-violet-300">
               Signal deck
             </p>
 
-            <h3 className="mt-5 line-clamp-3 text-2xl sm:text-3xl md:text-4xl font-black tracking-tight">
+            <h3 className="mt-4 break-words text-2xl font-black tracking-tight sm:text-3xl md:text-4xl">
               {activeItem.title}
             </h3>
 
@@ -200,10 +200,10 @@ export function SignalDeck({
                     key={item.id}
                     type="button"
                     onClick={() => onSelectIndex(index)}
-                    className={`flex items-center gap-3 rounded-2xl border p-2 text-left transition ${
+                    className={`flex w-full min-w-0 items-center gap-3 rounded-2xl border p-2 text-left backdrop-blur-md transition ${
                       active
-                        ? "border-violet-300/50 bg-white/[0.08]"
-                        : "border-white/10 bg-white/[0.02] opacity-70 hover:opacity-100"
+                        ? "border-violet-300/30 bg-white/[0.06]"
+                        : "border-white/[0.1] bg-white/[0.015] opacity-70 hover:opacity-100 hover:border-violet-300/20"
                     }`}
                   >
                     <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl">

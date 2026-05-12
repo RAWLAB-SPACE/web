@@ -9,7 +9,6 @@ import { SignalModal } from "@/components/signal/SignalModal";
 import { SignalDeck } from "@/components/signal/SignalDeck";
 
 import { modalStars } from "@/components/signal/signalStars";
-
 import { useSignalDeck } from "@/hooks/useSignalDeck";
 
 type InstagramSignalSectionProps = {
@@ -41,47 +40,65 @@ export function InstagramSignalSection({
   if (!activeItem) return null;
 
   return (
-    <section id="instagram" className="relative overflow-hidden px-6 py-32">
-      <div className="absolute right-[-12rem] top-32 h-[34rem] w-[34rem] rounded-full bg-fuchsia-500/10 blur-[140px]" />
+    <section
+      id="instagram"
+      className="relative w-full max-w-full overflow-x-clip px-4 py-32 sm:px-6"
+    >
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div
+          className="absolute top-32 right-0
+            h-[34rem] w-[34rem]
+            translate-x-1/3
+            rounded-full
+            bg-fuchsia-500/10
+            blur-[140px]"
+        />
+      </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl">
-        <div className="mb-12 grid gap-8 md:grid-cols-[0.8fr_1.2fr] md:items-end">
-          <div>
-            <p className="text-sm uppercase tracking-[0.4em] text-violet-300">
+      <div className="relative z-10 mx-auto w-full max-w-7xl overflow-hidden">
+        <div className="mb-10 grid w-full min-w-0 max-w-full gap-5 md:mb-12 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:items-end">
+          <div className="min-w-0">
+            <p className="break-words text-sm uppercase tracking-[0.32em] text-violet-300 sm:tracking-[0.4em]">
               {t.instagram.eyebrow}
             </p>
 
-            <h2 className="mt-6 text-4xl font-black tracking-tight md:text-7xl">
+            <h2 className="mt-4 break-words text-3xl font-black tracking-tight sm:text-4xl md:mt-6 md:text-7xl">
               {t.instagram.title}
             </h2>
           </div>
 
-          <p className="max-w-xl text-sm leading-7 text-slate-400">
+          <p className="min-w-0 max-w-xl text-sm leading-7 text-slate-400 sm:text-base">
             {t.instagram.description}
           </p>
         </div>
 
-        <SignalStories
-          stories={stories}
-          profileUsername={profile?.username}
-          onOpenStory={openFragment}
-        />
-
-        <div className="grid gap-6 lg:grid-cols-[0.7fr_1.3fr]">
-          <SignalProfile profile={profile} />
-
-          <SignalDeck
-            fragments={fragments}
-            activeIndex={activeIndex}
-            activeItem={activeItem}
-            visibleStack={visibleStack}
-            liveLabel={t.instagram.live}
-            signalLabel={t.instagram.signal}
-            openLabel={t.instagram.open}
-            onSelectIndex={setActiveIndex}
-            onOpenFragment={openFragment}
-            onPauseChange={setIsPaused}
+        <div className="w-full min-w-0 max-w-full overflow-hidden">
+          <SignalStories
+            stories={stories}
+            profileUsername={profile?.username}
+            onOpenStory={openFragment}
           />
+        </div>
+
+        <div className="grid w-full min-w-0 max-w-full gap-6 overflow-hidden lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)]">
+          <div className="min-w-0">
+            <SignalProfile profile={profile} />
+          </div>
+
+          <div className="min-w-0">
+            <SignalDeck
+              fragments={fragments}
+              activeIndex={activeIndex}
+              activeItem={activeItem}
+              visibleStack={visibleStack}
+              liveLabel={t.instagram.live}
+              signalLabel={t.instagram.signal}
+              openLabel={t.instagram.open}
+              onSelectIndex={setActiveIndex}
+              onOpenFragment={openFragment}
+              onPauseChange={setIsPaused}
+            />
+          </div>
         </div>
       </div>
 

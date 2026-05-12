@@ -1,7 +1,9 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 import { EnvironmentToggle } from "@/components/EnvironmentToggle";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { useLanguage } from "@/context/LanguageContext";
@@ -9,8 +11,11 @@ import { useActiveSection } from "@/hooks/useActiveSection";
 
 export function Navigation() {
   const { t } = useLanguage();
+
   const activeSection = useActiveSection();
+
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const navItems = [
     {
@@ -30,85 +35,246 @@ export function Navigation() {
     },
   ];
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 24);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   return (
-    <header className="fixed left-0 top-0 z-50 w-full px-6 py-6">
-      <nav
-        className="mx-auto flex max-w-6xl items-center justify-between rounded-full border px-5 py-3 backdrop-blur-md"
-        style={{
-          borderColor: "var(--border)",
-          background:
-            "color-mix(in srgb, var(--background) 80%, transparent)",
-        }}
-      >
-        <a
-          href="#"
-          className="text-sm font-bold tracking-[0.35em] transition hover:text-violet-300"
-        >
-          RAWLAB_
-        </a>
+    <>
+      <header className="fixed left-0 top-0 z-[80] w-full px-2 py-2 sm:px-3 md:px-6 md:py-5">
+        <motion.nav
+          animate={{
+            y: 0,
+            opacity: 1,
+            scale: isScrolled ? 0.985 : 1,
+          }}
+          transition={{
+            duration: 0.35,
+            ease: "easeOut",
+          }}
+          className="
+            mx-auto
+            flex
+            w-full
+            max-w-6xl
+            items-center
+            justify-between
+            overflow-hidden
+            rounded-[1.2rem]
+            border
+            px-3
+            py-2.5
+            backdrop-blur-2xl
 
-        <div className="hidden gap-2 text-xs uppercase tracking-[0.25em] md:flex">
-          {navItems.map((item) => (
-            <a
-              key={item.id}
-              href={item.href}
-              className={`rounded-full px-4 py-2 transition ${
-                activeSection === item.id
-                  ? "bg-white/10 text-violet-300"
-                  : "text-slate-400 hover:text-white"
-              }`}
-            >
-              {item.label}
-            </a>
-          ))}
-        </div>
-
-        <div className="hidden items-center gap-2 md:flex">
-          <LanguageToggle />
-          <EnvironmentToggle />
-        </div>
-
-        <button
-          onClick={() => setIsOpen((current) => !current)}
-          className="rounded-full border border-white/10 p-2 md:hidden"
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
-      </nav>
-
-      {isOpen && (
-        <div
-          className="mx-auto mt-3 max-w-6xl rounded-[2rem] border p-5 backdrop-blur-md md:hidden"
+            md:rounded-full
+            md:px-6
+            md:py-3
+          "
           style={{
-            borderColor: "var(--border)",
+            borderColor: "color-mix(in srgb, var(--border) 75%, transparent)",
             background:
-              "color-mix(in srgb, var(--background) 88%, transparent)",
+              "color-mix(in srgb, var(--background) 72%, transparent)",
+            boxShadow: isScrolled
+              ? "0 10px 40px rgba(0,0,0,0.28)"
+              : "0 4px 24px rgba(0,0,0,0.16)",
           }}
         >
-          <div className="flex flex-col gap-2 text-xs uppercase tracking-[0.25em]">
-            {navItems.map((item) => (
-              <a
-                key={item.id}
-                href={item.href}
-                onClick={() => setIsOpen(false)}
-                className={`rounded-full px-4 py-3 transition ${
-                  activeSection === item.id
-                    ? "bg-white/10 text-violet-300"
-                    : "text-slate-400 hover:text-white"
-                }`}
-              >
-                {item.label}
-              </a>
-            ))}
+          <a
+            href="#"
+            className="
+              shrink-0
+              font-black
+              text-white
+              transition
+              hover:text-violet-300
+            "
+          >
+            <span className="text-[10px] tracking-[0.24em] md:hidden">
+              RAW_
+            </span>
+
+            <span className="hidden text-sm tracking-[0.35em] md:inline">
+              RAWLAB_
+            </span>
+          </a>
+
+          <div className="hidden items-center gap-2 md:flex">
+            {navItems.map((item) => {
+              const active = activeSection === item.id;
+
+              return (
+                <a
+                  key={item.id}
+                  href={item.href}
+                  className={`
+                    rounded-full
+                    px-4
+                    py-2
+                    text-[11px]
+                    uppercase
+                    tracking-[0.25em]
+                    transition
+
+                    ${
+                      active
+                        ? "border border-violet-300/30 bg-white/[0.07] text-violet-300"
+                        : "border border-transparent text-slate-400 hover:border-white/10 hover:bg-white/[0.04] hover:text-white"
+                    }
+                  `}
+                >
+                  {item.label}
+                </a>
+              );
+            })}
           </div>
 
-          <div className="mt-5 flex gap-2">
+          <div className="hidden items-center gap-2 md:flex">
             <LanguageToggle />
             <EnvironmentToggle />
           </div>
-        </div>
-      )}
-    </header>
+
+          <button
+            onClick={() => setIsOpen((current) => !current)}
+            className="
+              flex
+              h-9
+              w-9
+              items-center
+              justify-center
+              rounded-full
+              border
+              border-white/[0.08]
+              bg-white/[0.03]
+              backdrop-blur-md
+              transition
+              hover:border-violet-300/30
+              hover:bg-white/[0.06]
+
+              md:hidden
+            "
+            aria-label="Toggle menu"
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={isOpen ? "close" : "menu"}
+                initial={{ opacity: 0, rotate: -90, scale: 0.8 }}
+                animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                exit={{ opacity: 0, rotate: 90, scale: 0.8 }}
+                transition={{ duration: 0.18 }}
+              >
+                {isOpen ? (
+                  <X className="h-4 w-4" />
+                ) : (
+                  <Menu className="h-4 w-4" />
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </button>
+        </motion.nav>
+      </header>
+
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsOpen(false)}
+              className="fixed inset-0 z-[70] bg-black/60 backdrop-blur-md md:hidden"
+            />
+
+            <motion.div
+              initial={{ opacity: 0, y: -24, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -16, scale: 0.96 }}
+              transition={{
+                duration: 0.28,
+                ease: "easeOut",
+              }}
+              className="
+                fixed
+                left-2
+                right-2
+                top-[4.8rem]
+                z-[90]
+                overflow-hidden
+                rounded-[1.8rem]
+                border
+                border-white/[0.08]
+                bg-[color-mix(in_srgb,var(--background)_88%,transparent)]
+                p-4
+                shadow-2xl
+                shadow-black/40
+                backdrop-blur-2xl
+
+                sm:left-3
+                sm:right-3
+              "
+            >
+              <div className="flex flex-col gap-2">
+                {navItems.map((item, index) => {
+                  const active = activeSection === item.id;
+
+                  return (
+                    <motion.a
+                      key={item.id}
+                      href={item.href}
+                      initial={{ opacity: 0, x: -16 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{
+                        delay: index * 0.06,
+                      }}
+                      onClick={() => setIsOpen(false)}
+                      className={`
+                        rounded-2xl
+                        border
+                        px-4
+                        py-4
+                        text-[11px]
+                        uppercase
+                        tracking-[0.24em]
+                        transition
+
+                        ${
+                          active
+                            ? "border-violet-300/25 bg-white/[0.06] text-violet-300"
+                            : "border-white/[0.05] bg-white/[0.02] text-slate-300 hover:border-violet-300/20 hover:bg-white/[0.04] hover:text-white"
+                        }
+                      `}
+                    >
+                      {item.label}
+                    </motion.a>
+                  );
+                })}
+              </div>
+
+              <div className="mt-5 flex items-center gap-2 border-t border-white/[0.05] pt-5">
+                <LanguageToggle />
+                <EnvironmentToggle />
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

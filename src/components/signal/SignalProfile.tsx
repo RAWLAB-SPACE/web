@@ -15,13 +15,13 @@ function formatNumber(value?: number) {
 
 export function SignalProfile({ profile }: SignalProfileProps) {
   return (
-    <div className="flex flex-col justify-between rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl">
-      <div>
-        <p className="text-xs uppercase tracking-[0.35em] text-violet-300">
+    <div className="flex w-full min-w-0 flex-col justify-between overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] p-5 backdrop-blur-xl sm:p-6">
+      <div className="min-w-0">
+        <p className="text-[10px] uppercase tracking-[0.28em] text-violet-300 sm:text-xs sm:tracking-[0.35em]">
           Live profile
         </p>
 
-        <h3 className="mt-5 text-4xl font-black tracking-tight">
+        <h3 className="mt-5 min-w-0 break-all text-[2rem] font-black leading-none tracking-tight sm:text-[2.6rem] md:text-5xl">
           @{profile?.username ?? "chilean.innerfire"}
         </h3>
 
@@ -31,9 +31,9 @@ export function SignalProfile({ profile }: SignalProfileProps) {
         </p>
       </div>
 
-      <div className="mt-8 grid grid-cols-2 gap-3">
-        <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-          <p className="text-[10px] uppercase tracking-[0.25em] text-slate-500">
+      <div className="mt-8 grid w-full min-w-0 grid-cols-2 gap-3">
+        <div className="min-w-0 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+          <p className="truncate text-[10px] uppercase tracking-[0.22em] text-slate-500">
             Followers
           </p>
           <p className="mt-2 text-2xl font-semibold">
@@ -41,8 +41,8 @@ export function SignalProfile({ profile }: SignalProfileProps) {
           </p>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-          <p className="text-[10px] uppercase tracking-[0.25em] text-slate-500">
+        <div className="min-w-0 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+          <p className="truncate text-[10px] uppercase tracking-[0.22em] text-slate-500">
             Following
           </p>
           <p className="mt-2 text-2xl font-semibold">
@@ -50,8 +50,8 @@ export function SignalProfile({ profile }: SignalProfileProps) {
           </p>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-          <p className="text-[10px] uppercase tracking-[0.25em] text-slate-500">
+        <div className="min-w-0 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+          <p className="truncate text-[10px] uppercase tracking-[0.22em] text-slate-500">
             Media
           </p>
           <p className="mt-2 text-2xl font-semibold">
@@ -59,11 +59,11 @@ export function SignalProfile({ profile }: SignalProfileProps) {
           </p>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-          <p className="text-[10px] uppercase tracking-[0.25em] text-slate-500">
+        <div className="min-w-0 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+          <p className="truncate text-[10px] uppercase tracking-[0.22em] text-slate-500">
             Account
           </p>
-          <p className="mt-2 text-sm font-semibold">
+          <p className="mt-2 truncate text-sm font-semibold">
             {profile?.account_type ?? "Creator"}
           </p>
         </div>
