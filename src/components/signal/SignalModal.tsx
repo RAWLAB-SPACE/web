@@ -85,7 +85,7 @@ export function SignalModal({
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
       onClick={onClose}
-      className="fixed inset-0 z-[9999] flex items-start justify-center overflow-y-auto px-3 py-4 backdrop-blur-xl sm:px-4 md:items-center md:px-6 md:py-10"
+      className="fixed inset-0 z-[9999] flex items-start justify-center overflow-y-auto px-3 py-4 backdrop-blur-sm md:backdrop-blur-xl sm:px-4 md:items-center md:px-6 md:py-10"
       style={{
         background: "color-mix(in srgb, var(--background) 84%, black)",
       }}
@@ -125,7 +125,7 @@ export function SignalModal({
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.45, ease: "easeOut" }}
         onClick={(event) => event.stopPropagation()}
-        className="relative z-10 flex w-full max-w-[100vw] flex-col overflow-hidden rounded-[1.25rem] border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/50 backdrop-blur-2xl max-h-[95vh] md:grid md:max-h-[92vh] md:max-w-6xl md:grid-cols-[1.1fr_0.9fr] md:rounded-[2.5rem]"
+        className="relative z-10 flex w-full max-w-[100vw] flex-col overflow-hidden rounded-[1.25rem] border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/50 backdrop-blur-md md:backdrop-blur-2xl max-h-[95vh] md:grid md:max-h-[92vh] md:max-w-6xl md:grid-cols-[1.1fr_0.9fr] md:rounded-[2.5rem]"
       >
         <div className="relative h-[42vh] min-h-[18rem] w-full md:min-h-[70vh]">
           {activeFragment.type === "reel" &&

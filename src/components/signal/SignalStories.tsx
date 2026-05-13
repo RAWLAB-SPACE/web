@@ -35,15 +35,16 @@ export function SignalStories({
               <div className="relative">
                 <div className="absolute inset-0 rounded-full bg-gradient-to-br from-fuchsia-500 via-violet-500 to-cyan-400 opacity-70 blur-md transition group-hover:opacity-100" />
 
-                <div className="relative h-20 w-20 overflow-hidden rounded-full border border-white/10 p-[3px] backdrop-blur-xl">
+                <div className="relative h-20 w-20 overflow-hidden rounded-full border border-white/10 p-[3px] backdrop-blur-sm md:backdrop-blur-xl">
                   <div className="relative h-full w-full overflow-hidden rounded-full">
                     <Image
-                      src={story.image}
-                      alt={story.title}
-                      fill
-                      sizes="80px"
-                      className="object-cover"
-                    />
+                        src={story.image}
+                        alt={story.title}
+                        fill
+                        draggable={false}
+                        sizes="(max-width: 768px) 64px, 80px"
+                        className="select-none object-cover"
+                      />
                   </div>
                 </div>
               </div>
@@ -60,7 +61,7 @@ export function SignalStories({
             </motion.button>
           ))
         ) : (
-          <div className="flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 backdrop-blur-xl">
+          <div className="flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 backdrop-blur-sm md:backdrop-blur-xl">
             <div className="relative h-8 w-8 rounded-full border border-dashed border-violet-300/40">
               <div className="absolute inset-[5px] rounded-full bg-violet-300/20" />
 

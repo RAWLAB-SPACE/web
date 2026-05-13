@@ -17,7 +17,7 @@ function pseudoRandom(seed: number) {
   return x - Math.floor(x);
 }
 
-const stars: Star[] = Array.from({ length: 90 }, (_, index) => {
+const stars: Star[] = Array.from({ length: 60 }, (_, index) => {
   const seed = index + 1;
 
   return {
@@ -56,7 +56,7 @@ export function StarfieldBackground() {
         />
       ))}
 
-      <span className="raw-shooting-star absolute left-[-20%] top-[20%] h-px w-[35rem] rotate-[-18deg]" />
+      <span className="hidden md:block raw-shooting-star absolute left-[-20%] top-[20%] h-px w-[35rem] rotate-[-18deg]" />
     </div>
   );
 }

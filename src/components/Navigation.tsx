@@ -82,7 +82,7 @@ export function Navigation() {
             border
             px-3
             py-2.5
-            backdrop-blur-2xl
+            backdrop-blur-md md:backdrop-blur-2xl
 
             md:rounded-full
             md:px-6
@@ -224,7 +224,7 @@ export function Navigation() {
                 p-4
                 shadow-2xl
                 shadow-black/40
-                backdrop-blur-2xl
+                backdrop-blur-md md:backdrop-blur-2xl
 
                 sm:left-3
                 sm:right-3

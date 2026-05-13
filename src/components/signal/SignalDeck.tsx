@@ -36,7 +36,7 @@ export function SignalDeck({
     <div
       onMouseEnter={() => onPauseChange?.(true)}
       onMouseLeave={() => onPauseChange?.(false)}
-      className="relative w-full max-w-full overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] p-4 backdrop-blur-xl sm:rounded-[2.5rem] sm:p-6"
+      className="relative w-full max-w-full overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] p-4 backdrop-blur-sm md:backdrop-blur-xl sm:rounded-[2.5rem] sm:p-6"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(217,70,239,0.14),transparent_55%)]" />
       <div className="absolute inset-0 opacity-20 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] bg-[size:56px_56px]" />
@@ -58,14 +58,13 @@ export function SignalDeck({
                   }
                 }}
                 whileHover={
-                  isActive
-                    ? {
-                        scale: 1.02,
-
-                        y: -6,
-                      }
-                    : undefined
-                }
+                    isActive
+                      ? {
+                          scale: 1.01,
+                          y: -3,
+                        }
+                      : undefined
+                  }
                 animate={{
                   x: stackIndex * 14,
 

@@ -31,10 +31,10 @@ export function InteractiveCollage() {
             delay: index * 0.08,
           }}
           whileHover={{
-            y: -8,
-            scale: 1.03,
-            rotate: 0,
-          }}
+              y: -4,
+              scale: 1.01,
+              rotate: 0,
+            }}
           className={`
             group relative overflow-hidden rounded-[2rem]
             border border-white/10
@@ -55,7 +55,7 @@ export function InteractiveCollage() {
                 select-none
                 object-cover
                 transition duration-700
-                group-hover:scale-110
+                md:group-hover:scale-110
               "
           />
 

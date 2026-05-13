@@ -45,7 +45,7 @@ export function InstagramSignalSection({
       className="relative w-full max-w-full overflow-x-clip px-4 py-32 sm:px-6"
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute right-0 top-32 h-[34rem] w-[34rem] translate-x-1/3 rounded-full bg-fuchsia-500/10 blur-[140px]" />
+        <div className="absolute right-0 top-32 h-[34rem] w-[34rem] translate-x-1/3 rounded-full bg-fuchsia-500/10 blur-[60px] md:blur-[140px]" />
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-7xl overflow-hidden">

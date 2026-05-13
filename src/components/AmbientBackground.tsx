@@ -7,15 +7,23 @@ export function AmbientBackground() {
     <div className="pointer-events-none fixed inset-0 overflow-hidden">
       <motion.div
         animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute left-[10%] top-[15%] h-[28rem] w-[28rem] rounded-full blur-[120px]"
+        transition={{
+  duration: 26,
+  repeat: Infinity,
+  ease: "linear",
+}}
+        className="absolute left-[10%] top-[15%] h-[28rem] w-[28rem] rounded-full blur-[50px] md:blur-[120px]"
         style={{ background: "var(--glow-primary)" }}
       />
 
       <motion.div
         animate={{ x: [0, -50, 0], y: [0, 50, 0] }}
-        transition={{ duration: 24, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-[10%] right-[5%] h-[24rem] w-[24rem] rounded-full blur-[120px]"
+        transition={{
+  duration: 24,
+  repeat: Infinity,
+  ease: "linear",
+}}
+        className="absolute bottom-[10%] right-[5%] h-[24rem] w-[24rem] rounded-full blur-[50px] md:blur-[120px]"
         style={{ background: "var(--glow-secondary)" }}
       />
 
