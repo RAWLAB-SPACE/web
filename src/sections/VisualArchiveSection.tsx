@@ -73,14 +73,19 @@ export function VisualArchiveSection() {
             "
           >
             <Image
-              src={activeItem.image}
-              alt={activeItem.title}
-              fill
-              className="
-                object-cover transition duration-700
-                group-hover:scale-105
-              "
-            />
+                src={activeItem.image}
+                alt={activeItem.title}
+                fill
+                priority={activeIndex === 0}
+                draggable={false}
+                sizes="(max-width: 1024px) 100vw, 65vw"
+                className="
+                  select-none
+                  object-cover
+                  transition duration-700
+                  group-hover:scale-105
+                "
+              />
 
             <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/80" />
 
@@ -140,11 +145,13 @@ export function VisualArchiveSection() {
                     }`}
                   >
                     <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      className="object-cover"
-                    />
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        draggable={false}
+                        sizes="(max-width: 768px) 22vw, 80px"
+                        className="select-none object-cover"
+                      />
                   </button>
                 ))}
               </div>
@@ -214,7 +221,10 @@ export function VisualArchiveSection() {
               src={selectedItem.image}
               alt={selectedItem.title}
               fill
-              className="object-cover"
+              priority
+              draggable={false}
+              sizes="100vw"
+              className="select-none object-cover"
             />
 
             <div

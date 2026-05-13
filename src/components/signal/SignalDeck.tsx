@@ -104,14 +104,14 @@ ${
               >
                 <div className="absolute inset-0 overflow-hidden rounded-[2rem] bg-black">
                   <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    priority={isActive}
-                    draggable={false}
-                    sizes="320px"
-                    className="select-none object-cover scale-[1.1]"
-                  />
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      quality={82}
+                      draggable={false}
+                      sizes="(max-width: 768px) 70vw, 320px"
+                      className="select-none object-cover scale-[1.1]"
+                    />
                 </div>
 
                 <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-b from-black/5 via-black/10 to-black/80" />

@@ -48,11 +48,15 @@ export function InteractiveCollage() {
             src={item.image}
             alt={item.title}
             fill
+            priority={index === 0}
+            draggable={false}
+            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 320px"
             className="
-              object-cover
-              transition duration-700
-              group-hover:scale-110
-            "
+                select-none
+                object-cover
+                transition duration-700
+                group-hover:scale-110
+              "
           />
 
           <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/80" />
