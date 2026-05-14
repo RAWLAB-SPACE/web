@@ -25,6 +25,8 @@ import { InstagramSignalSectionServer } from "@/sections/InstagramSignalSectionS
 import { DocumentsSection } from "@/sections/DocumentsSection";
 import { ManifestoSection } from "@/sections/ManifestoSection";
 import { ExperienceSignalSection } from "@/sections/ExperienceSignalSection";
+import { AboutSignalSection } from "@/sections/AboutSignalSection";
+import { SystemCapabilitiesSection } from "@/sections/SystemCapabilitiesSection";
 
 export const dynamic = "force-dynamic";
 
@@ -60,6 +62,10 @@ export default function Home() {
           <ProjectsPreviewSection />
 
           <ExperienceSignalSection />
+
+          <AboutSignalSection />
+
+          <SystemCapabilitiesSection />
 
           <GithubSectionServer />
 
