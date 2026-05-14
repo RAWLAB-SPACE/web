@@ -18,22 +18,47 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://web-raus-projects.vercel.app"),
 
-  title: "RAWLAB_",
+  title: {
+    default: "RAWLAB_ — Raúl Ruiz",
+    template: "%s · RAWLAB_",
+  },
 
   description:
-    "RAWLAB_ is a digital archive of movement, climbing, design systems, frontend engineering, visual experimentation and human-centered interactive experiences.",
+    "Portfolio of Raúl Ruiz, Senior Frontend & Mobile Developer focused on React Native, Next.js, design systems, motion UI, performance and creative frontend engineering.",
+
+  keywords: [
+    "Raúl Ruiz",
+    "Frontend Developer",
+    "Mobile Developer",
+    "React Native",
+    "Next.js",
+    "TypeScript",
+    "Design Systems",
+    "Motion UI",
+    "Creative Frontend",
+    "Santiago Chile",
+  ],
+
+  authors: [{ name: "Raúl Ruiz", url: "https://www.linkedin.com/in/adhesiboss/" }],
+  creator: "Raúl Ruiz",
+  publisher: "RAWLAB_",
+
+  alternates: {
+    canonical: "/",
+  },
 
   openGraph: {
-    title: "RAWLAB_",
+    title: "RAWLAB_ — Raúl Ruiz",
     description:
-      "Movement, code, design and human experiences.",
-    url: "https://web-raus-projects.vercel.app",
+      "Senior Frontend & Mobile Developer focused on React Native, Next.js, design systems, motion UI and creative frontend engineering.",
+    url: "/",
     siteName: "RAWLAB_",
     images: [
       {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
+        alt: "RAWLAB_ — Raúl Ruiz portfolio",
       },
     ],
     locale: "en_US",
@@ -42,9 +67,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "RAWLAB_",
+    title: "RAWLAB_ — Raúl Ruiz",
     description:
-      "Movement, code, design and human experiences.",
+      "Senior Frontend & Mobile Developer focused on React Native, Next.js, design systems, motion UI and creative frontend engineering.",
     images: ["/opengraph-image"],
   },
 
@@ -52,6 +77,11 @@ export const metadata: Metadata = {
     icon: "/icon",
     shortcut: "/icon",
     apple: "/icon",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
