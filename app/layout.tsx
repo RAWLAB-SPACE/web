@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 
 import "./globals.css";
 
@@ -102,7 +103,7 @@ export default function RootLayout({
           overflow-x-hidden
         `}
       >
-        {children}
+        <SmoothScrollProvider>{children}</SmoothScrollProvider>
 
         {/* Analytics */}
         <Analytics />
