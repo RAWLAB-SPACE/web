@@ -9,7 +9,7 @@ const links = [
 
 export function Footer() {
   return (
-    <footer className="px-6 pb-6 pt-3 sm:px-6">
+    <footer className="relative z-20 px-6 pb-6 pt-3 sm:px-6">
       <div className="mx-auto max-w-7xl">
         <div
           className="

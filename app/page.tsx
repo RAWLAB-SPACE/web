@@ -27,6 +27,7 @@ import { ManifestoSection } from "@/sections/ManifestoSection";
 import { ExperienceSignalSection } from "@/sections/ExperienceSignalSection";
 import { AboutSignalSection } from "@/sections/AboutSignalSection";
 import { SystemCapabilitiesSection } from "@/sections/SystemCapabilitiesSection";
+import { MatrixRain } from "@/components/MatrixRain";
 
 export const dynamic = "force-dynamic";
 
@@ -44,8 +45,10 @@ export default function Home() {
       <AmbientBackground />
       <SignalNoise />
       <StarfieldBackground />
+      <MatrixRain />
       <CursorGlow />
       <SectionIndicator />
+      
 
       <LanguageProvider>
         <div className="relative z-10 overflow-x-hidden">
