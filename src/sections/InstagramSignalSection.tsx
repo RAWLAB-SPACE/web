@@ -65,7 +65,7 @@ export function InstagramSignalSection({
           </p>
         </div>
 
-        <div className="w-full min-w-0 max-w-full overflow-hidden">
+        <div className="w-full min-w-0 max-w-full overflow-hidden ">
           <SignalStories
             stories={stories}
             profileUsername={profile?.username}

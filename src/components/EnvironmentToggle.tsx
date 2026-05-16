@@ -18,6 +18,11 @@ export function EnvironmentToggle() {
     setTheme(nextTheme);
 
     document.documentElement.dataset.theme = nextTheme;
+    window.dispatchEvent(
+  new CustomEvent("rawlab-theme-change", {
+    detail: nextTheme,
+  }),
+);
   }
 
   useEffect(() => {

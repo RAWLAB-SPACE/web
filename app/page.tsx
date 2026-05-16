@@ -48,7 +48,6 @@ export default function Home() {
       <MatrixRain />
       <CursorGlow />
       <SectionIndicator />
-      
 
       <LanguageProvider>
         <div className="relative z-10 overflow-x-hidden">
@@ -72,15 +71,25 @@ export default function Home() {
 
           <GithubSectionServer />
 
-          <RawlogSection />
+          <div className="focus-hidden">
+            <RawlogSection />
+          </div>
 
-          <LivingArchiveSection />
+          <div className="focus-hidden">
+            <LivingArchiveSection />
+          </div>
 
-          <VisualArchiveSection />
+          <div className="focus-hidden">
+            <VisualArchiveSection />
+          </div>
 
-          <ConnectedSignalsSection />
+          <div className="focus-hidden">
+            <ConnectedSignalsSection />
+          </div>
 
-          <InstagramSignalSectionServer />
+          <div className="focus-hidden">
+            <InstagramSignalSectionServer />
+          </div>
 
           <DocumentsSection />
 

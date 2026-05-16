@@ -16,7 +16,7 @@ export function SignalStories({
   onOpenStory,
 }: SignalStoriesProps) {
   return (
-    <div className="mb-10 overflow-x-auto pb-2">
+    <div className="mb-4 overflow-x-auto pb-2">
       <div className="flex w-full min-w-0 items-center gap-3 overflow-x-auto">
         {stories.length > 0 ? (
           stories.map((story, index) => (
@@ -30,7 +30,7 @@ export function SignalStories({
                 duration: 0.4,
                 delay: index * 0.05,
               }}
-              className="group flex flex-col items-center gap-3"
+              className="group flex flex-col items-center gap-3 pt-6 pl-4"
             >
               <div className="relative">
                 <div className="absolute inset-0 rounded-full bg-gradient-to-br from-fuchsia-500 via-violet-500 to-cyan-400 opacity-70 blur-md transition group-hover:opacity-100" />
