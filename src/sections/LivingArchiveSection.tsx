@@ -23,7 +23,7 @@ const archiveItems = [
 
 export function LivingArchiveSection() {
   return (
-    <section id="archive" className="px-6 py-32">
+    <section  className="px-6 py-32">
       <div className="mx-auto max-w-6xl">
         <div className="mb-14 max-w-3xl">
           <p className="text-sm uppercase tracking-[0.4em] text-violet-300">

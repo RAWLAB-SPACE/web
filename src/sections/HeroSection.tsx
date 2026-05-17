@@ -171,16 +171,7 @@ const isFocus = theme === "focus";
                   <a
                     href="https://github.com/RAWLAB-SPACE"
                     target="_blank"
-                    className="
-                      rounded-full border border-white/10
-                      bg-[#00ff9d]
-                      px-6 py-3
-                      font-mono text-xs uppercase
-                      tracking-[0.25em]
-                      text-black
-                      transition
-                      hover:bg-white
-                    "
+                    className="focus-github-cta rounded-full border px-6 py-3 font-mono text-xs uppercase tracking-[0.25em] transition"
                   >
                     Github
                   </a>
@@ -284,7 +275,7 @@ const isFocus = theme === "focus";
         >
           <InteractiveCollage />
         </motion.div>
-      </div>  q
+      </div>
     </section>
   );
 }

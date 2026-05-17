@@ -9,21 +9,29 @@ const themes: Theme[] = ["void", "light", "focus"];
 export function EnvironmentToggle() {
   const [theme, setTheme] = useState<Theme>("void");
 
-  function handleToggleTheme() {
-    const currentIndex = themes.indexOf(theme);
+function handleToggleTheme() {
+  const currentIndex = themes.indexOf(theme);
+  const nextTheme = themes[(currentIndex + 1) % themes.length];
 
-    const nextTheme =
-      themes[(currentIndex + 1) % themes.length];
+  setTheme(nextTheme);
 
-    setTheme(nextTheme);
+  document.documentElement.dataset.theme = nextTheme;
 
-    document.documentElement.dataset.theme = nextTheme;
-    window.dispatchEvent(
+window.history.replaceState(null, "", window.location.pathname);
+
+window.dispatchEvent(
   new CustomEvent("rawlab-theme-change", {
     detail: nextTheme,
   }),
 );
-  }
+
+window.requestAnimationFrame(() => {
+  document.getElementById("hero")?.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+});
+}
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
