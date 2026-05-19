@@ -26,6 +26,8 @@ import { ManifestoSection } from "@/sections/ManifestoSection";
 import { ExperienceSignalSection } from "@/sections/ExperienceSignalSection";
 import { AboutSignalSection } from "@/sections/AboutSignalSection";
 import { SystemCapabilitiesSection } from "@/sections/SystemCapabilitiesSection";
+import { SunCursorGlow } from "@/components/SunCursorGlow";
+import { ScrollBloom } from "@/components/ScrollBloom";
 
 export const dynamic = "force-dynamic";
 
@@ -34,17 +36,22 @@ export default function Home() {
     <main
       className="rawlab-app min-h-screen overflow-x-hidden raw-scanlines transition-colors duration-500"
       style={{
-        background: "var(--background)",
-        color: "var(--foreground)",
-      }}
+          background: "var(--background)",
+          color: "var(--foreground)",
+          backgroundAttachment: "fixed",
+        }}
     >
       <BootLoader />
 
       <AmbientBackground />
       <SignalNoise />
       <StarfieldBackground />
+      <div className="sun-fire" />
+      <div className="sun-cursor-glow" id="sun-cursor-glow" />
       <MatrixRain />
       <CursorGlow />
+      <SunCursorGlow />
+      <ScrollBloom />
       <SectionIndicator />
 
       <LanguageProvider>

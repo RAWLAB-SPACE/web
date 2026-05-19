@@ -71,46 +71,46 @@ export function SectionIndicator() {
   }, []);
 
   useEffect(() => {
-  const frame = window.requestAnimationFrame(() => {
-    setActiveSection("hero");
-  });
+    const frame = window.requestAnimationFrame(() => {
+      setActiveSection("hero");
+    });
 
-  function updateActiveSection() {
-    const current = sections
-      .map((section) => {
-        const element = document.getElementById(section.id);
+    function updateActiveSection() {
+      const current = sections
+        .map((section) => {
+          const element = document.getElementById(section.id);
 
-        if (!element) return null;
+          if (!element) return null;
 
-        const rect = element.getBoundingClientRect();
+          const rect = element.getBoundingClientRect();
 
-        return {
-          id: section.id,
-          distance: Math.abs(rect.top - 140),
-        };
-      })
-      .filter(Boolean)
-      .sort((a, b) => a!.distance - b!.distance)[0];
+          return {
+            id: section.id,
+            distance: Math.abs(rect.top - 140),
+          };
+        })
+        .filter(Boolean)
+        .sort((a, b) => a!.distance - b!.distance)[0];
 
-    if (current?.id) {
-      setActiveSection(current.id);
+      if (current?.id) {
+        setActiveSection(current.id);
+      }
     }
-  }
 
-  updateActiveSection();
+    updateActiveSection();
 
-  window.addEventListener("scroll", updateActiveSection, {
-    passive: true,
-  });
+    window.addEventListener("scroll", updateActiveSection, {
+      passive: true,
+    });
 
-  window.addEventListener("resize", updateActiveSection);
+    window.addEventListener("resize", updateActiveSection);
 
-  return () => {
-    window.cancelAnimationFrame(frame);
-    window.removeEventListener("scroll", updateActiveSection);
-    window.removeEventListener("resize", updateActiveSection);
-  };
-}, [sections, indicatorKey]);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
+  }, [sections, indicatorKey]);
 
   function handleClick(event: React.MouseEvent<HTMLAnchorElement>, id: string) {
     event.preventDefault();
@@ -142,23 +142,13 @@ export function SectionIndicator() {
       aria-label="Section navigation"
     >
       <div
-        className={
-          isFocus
-            ? `
-              relative flex flex-col items-center gap-5
-              rounded-[40px]
-              border border-[var(--focus-nav)]/20
-              bg-black/35 px-3 py-6
-              backdrop-blur-xl
-              shadow-[0_0_30px_rgba(0,255,157,0.08)]
-            `
-            : `
-              flex flex-col items-center gap-4
-              rounded-full border border-white/10
-              bg-black/25 px-2.5 py-4
-              backdrop-blur-xl
-            `
-        }
+       className="
+  section-indicator
+  flex flex-col items-center gap-4
+  rounded-full
+  px-2.5 py-4
+  backdrop-blur-xl
+"
       >
         {sections.map((section) => {
           const active = activeSection === section.id;
@@ -168,14 +158,16 @@ export function SectionIndicator() {
               key={section.id}
               href={`#${section.id}`}
               onClick={(event) => handleClick(event, section.id)}
-              className="group relative flex h-4 w-4 items-center justify-center"
+              className="section-indicator-link group relative flex h-4 w-4 items-center justify-center"
               aria-label={section.label}
               title={section.label}
+              data-active={active ? "true" : "false"}
             >
               <span
                 className={
                   isFocus
                     ? `
+                      section-indicator-dot
                       relative block rounded-full transition-all duration-300
                       ${
                         active
@@ -184,11 +176,12 @@ export function SectionIndicator() {
                       }
                     `
                     : `
+                      section-indicator-dot
                       h-1.5 w-1.5 rounded-full transition-all duration-300
                       ${
                         active
-                          ? "scale-150 bg-violet-300 shadow-[0_0_14px_rgba(196,181,253,1)]"
-                          : "bg-white/25 group-hover:bg-white/60"
+  ? "section-indicator-active scale-150"
+  : "section-indicator-inactive"
                       }
                     `
                 }
@@ -196,6 +189,7 @@ export function SectionIndicator() {
 
               <span
                 className={`
+                  section-indicator-label
                   pointer-events-none absolute right-6
                   whitespace-nowrap rounded-full px-3 py-1
                   text-[9px] uppercase tracking-[0.25em]

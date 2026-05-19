@@ -211,13 +211,14 @@ const isFocus = theme === "focus";
       />
 
       <div
-        className="
-          absolute inset-0 opacity-20
-          bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),
-          linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)]
-          bg-[size:64px_64px]
-        "
-      />
+  className="
+    theme-grid
+    absolute inset-0 opacity-20
+    bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),
+    linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)]
+    bg-[size:64px_64px]
+  "
+/>
 
       <div className="relative z-10 mx-auto grid max-w-7xl gap-20 lg:grid-cols-[0.9fr_1.1fr]">
         <motion.div
