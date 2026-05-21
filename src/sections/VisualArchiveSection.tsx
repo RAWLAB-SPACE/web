@@ -350,6 +350,7 @@ export function VisualArchiveSection() {
             </div>
           </div>,
           document.body,
+          
         )}
     </>
   );
