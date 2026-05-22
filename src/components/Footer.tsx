@@ -1,7 +1,7 @@
 "use client";
 
 const links = [
-  { label: "GitHub", href: "https://github.com/adhesiboss" },
+  { label: "GitHub", href: "https://github.com/RAWLABdev" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/adhesiboss/" },
   { label: "Instagram", href: "https://www.instagram.com/chilean.innerfire/" },
   { label: "Email", href: "mailto:chilean.innerfire@gmail.com" },
