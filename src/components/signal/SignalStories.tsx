@@ -41,6 +41,7 @@ export function SignalStories({
                         src={story.image}
                         alt={story.title}
                         fill
+                        unoptimized
                         draggable={false}
                         sizes="(max-width: 768px) 64px, 80px"
                         className="select-none object-cover"

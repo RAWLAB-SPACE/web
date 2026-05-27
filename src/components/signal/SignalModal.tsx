@@ -155,6 +155,7 @@ export function SignalModal({
                 alt={activeFragment.title}
                 fill
                 priority
+                unoptimized
                 draggable={false}
                 sizes="60vw"
                 className="select-none object-cover"
@@ -194,6 +195,7 @@ export function SignalModal({
                         src={childImage}
                         alt={`${activeFragment.title} ${index + 1}`}
                         fill
+                        unoptimized
                         draggable={false}
                         sizes="80px"
                         className="select-none object-cover"

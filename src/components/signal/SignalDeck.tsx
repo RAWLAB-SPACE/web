@@ -106,6 +106,7 @@ ${
                       src={item.image}
                       alt={item.title}
                       fill
+                      unoptimized
                       quality={82}
                       draggable={false}
                       sizes="(max-width: 768px) 70vw, 320px"
@@ -233,6 +234,7 @@ ${
                         src={item.image}
                         alt={item.title}
                         fill
+                        unoptimized
                         sizes="48px"
                         className="object-cover"
                       />
