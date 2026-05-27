@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 import { EnvironmentToggle } from "@/components/EnvironmentToggle";
 import { LanguageToggle } from "@/components/LanguageToggle";
+
 import { useLanguage } from "@/context/LanguageContext";
 import { useActiveSection } from "@/hooks/useActiveSection";
 
@@ -59,6 +60,10 @@ export function Navigation() {
 
   return (
     <>
+      {/* =========================================================
+          DESKTOP NAV
+      ========================================================= */}
+
       <header className="fixed left-0 top-0 z-[80] w-full px-2 py-2 sm:px-3 md:px-6 md:py-5">
         <motion.nav
           animate={{
@@ -89,7 +94,8 @@ export function Navigation() {
             md:py-3
           "
           style={{
-            borderColor: "color-mix(in srgb, var(--border) 75%, transparent)",
+            borderColor:
+              "color-mix(in srgb, var(--border) 75%, transparent)",
             background:
               "color-mix(in srgb, var(--background) 72%, transparent)",
             boxShadow: isScrolled
@@ -97,33 +103,104 @@ export function Navigation() {
               : "0 4px 24px rgba(0,0,0,0.16)",
           }}
         >
-          <a
+          {/* =========================================================
+              LOGO
+          ========================================================= */}
+
+          <motion.a
             href="#"
+            whileHover={{ y: -1 }}
+            whileTap={{ scale: 0.98 }}
             className="
-              shrink-0
-              font-black
-              text-white
-              transition
-              hover:text-violet-300
+              group relative flex shrink-0
+              items-center
+              font-black uppercase
+              tracking-[0.32em]
+              text-white transition
             "
           >
-            <span className="text-[10px] tracking-[0.24em] md:hidden">
+            {/* subtle glow */}
+            <div
+              className="
+                pointer-events-none absolute
+                left-1/2 top-1/2
+                h-10 w-24
+                -translate-x-1/2 -translate-y-1/2
+                rounded-full
+                bg-violet-400/10
+                blur-2xl
+              "
+            />
+
+            {/* mobile */}
+            <span
+              className="
+                relative text-[10px]
+                text-white
+                transition
+                drop-shadow-[0_0_10px_rgba(196,181,253,0.45)]
+                group-hover:text-violet-300
+
+                md:hidden
+              "
+            >
               RAW_
             </span>
 
-            <span className="hidden text-sm tracking-[0.35em] md:inline">
+            {/* desktop */}
+            <span
+              className="
+                relative hidden
+                text-xs
+                text-white
+                transition
+                drop-shadow-[0_0_10px_rgba(196,181,253,0.45)]
+                group-hover:text-violet-300
+
+                md:inline
+              "
+            >
               RAWLAB_
             </span>
-          </a>
+
+            {/* animated underline */}
+            <span
+              className="
+                pointer-events-none absolute
+                -bottom-1 left-0
+                h-px w-full
+                origin-left scale-x-50
+                bg-gradient-to-r
+                from-violet-300
+                via-cyan-300
+                to-transparent
+                opacity-60 transition
+                duration-300
+
+                group-hover:scale-x-100
+                group-hover:opacity-100
+              "
+            />
+          </motion.a>
+
+          {/* =========================================================
+              NAV ITEMS
+          ========================================================= */}
 
           <div className="hidden items-center gap-2 md:flex">
             {navItems.map((item) => {
               const active = activeSection === item.id;
 
               return (
-                <a
+                <motion.a
                   key={item.id}
                   href={item.href}
+                  whileHover={{
+                    y: -2,
+                  }}
+                  whileTap={{
+                    scale: 0.97,
+                  }}
                   className={`
                     rounded-full
                     px-4
@@ -135,21 +212,29 @@ export function Navigation() {
 
                     ${
                       active
-                        ? "border border-violet-300/30 bg-white/[0.07] text-violet-300"
+                        ? "border border-violet-300/30 bg-white/[0.07] text-violet-300 shadow-[0_0_24px_rgba(196,181,253,0.14)]"
                         : "border border-transparent text-slate-400 hover:border-white/10 hover:bg-white/[0.04] hover:text-white"
                     }
                   `}
                 >
                   {item.label}
-                </a>
+                </motion.a>
               );
             })}
           </div>
+
+          {/* =========================================================
+              TOGGLES
+          ========================================================= */}
 
           <div className="hidden items-center gap-2 md:flex">
             <LanguageToggle />
             <EnvironmentToggle />
           </div>
+
+          {/* =========================================================
+              MOBILE MENU BUTTON
+          ========================================================= */}
 
           <button
             onClick={() => setIsOpen((current) => !current)}
@@ -175,10 +260,24 @@ export function Navigation() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={isOpen ? "close" : "menu"}
-                initial={{ opacity: 0, rotate: -90, scale: 0.8 }}
-                animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                exit={{ opacity: 0, rotate: 90, scale: 0.8 }}
-                transition={{ duration: 0.18 }}
+                initial={{
+                  opacity: 0,
+                  rotate: -90,
+                  scale: 0.8,
+                }}
+                animate={{
+                  opacity: 1,
+                  rotate: 0,
+                  scale: 1,
+                }}
+                exit={{
+                  opacity: 0,
+                  rotate: 90,
+                  scale: 0.8,
+                }}
+                transition={{
+                  duration: 0.18,
+                }}
               >
                 {isOpen ? (
                   <X className="h-4 w-4" />
@@ -191,21 +290,44 @@ export function Navigation() {
         </motion.nav>
       </header>
 
+      {/* =========================================================
+          MOBILE MENU
+      ========================================================= */}
+
       <AnimatePresence>
         {isOpen && (
           <>
+            {/* backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 z-[70] bg-black/60 backdrop-blur-md md:hidden"
+              className="
+                fixed inset-0 z-[70]
+                bg-black/60
+                backdrop-blur-md
+                md:hidden
+              "
             />
 
+            {/* menu panel */}
             <motion.div
-              initial={{ opacity: 0, y: -24, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -16, scale: 0.96 }}
+              initial={{
+                opacity: 0,
+                y: -24,
+                scale: 0.96,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                scale: 1,
+              }}
+              exit={{
+                opacity: 0,
+                y: -16,
+                scale: 0.96,
+              }}
               transition={{
                 duration: 0.28,
                 ease: "easeOut",
@@ -230,6 +352,29 @@ export function Navigation() {
                 sm:right-3
               "
             >
+              {/* mobile logo */}
+              <div
+                className="
+                  mb-5 flex justify-center
+                  border-b border-white/[0.05]
+                  pb-5
+                "
+              >
+                <div
+                  className="
+                    relative
+                    text-[11px]
+                    font-black uppercase
+                    tracking-[0.35em]
+                    text-white
+                    drop-shadow-[0_0_10px_rgba(196,181,253,0.45)]
+                  "
+                >
+                  RAWLAB_
+                </div>
+              </div>
+
+              {/* nav links */}
               <div className="flex flex-col gap-2">
                 {navItems.map((item, index) => {
                   const active = activeSection === item.id;
@@ -238,10 +383,19 @@ export function Navigation() {
                     <motion.a
                       key={item.id}
                       href={item.href}
-                      initial={{ opacity: 0, x: -16 }}
-                      animate={{ opacity: 1, x: 0 }}
+                      initial={{
+                        opacity: 0,
+                        x: -16,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        x: 0,
+                      }}
                       transition={{
                         delay: index * 0.06,
+                      }}
+                      whileTap={{
+                        scale: 0.98,
                       }}
                       onClick={() => setIsOpen(false)}
                       className={`
@@ -267,7 +421,14 @@ export function Navigation() {
                 })}
               </div>
 
-              <div className="mt-5 flex items-center gap-2 border-t border-white/[0.05] pt-5">
+              {/* toggles */}
+              <div
+                className="
+                  mt-5 flex items-center gap-2
+                  border-t border-white/[0.05]
+                  pt-5
+                "
+              >
                 <LanguageToggle />
                 <EnvironmentToggle />
               </div>

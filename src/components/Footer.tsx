@@ -28,9 +28,44 @@ export function Footer() {
           "
         >
           <div className="min-w-0">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-violet-300">
-              RAWLAB_
-            </p>
+            <div
+              className="
+                group relative inline-flex
+                w-fit flex-col
+                overflow-visible
+              "
+              aria-label="RAWLAB"
+            >
+              <span
+                className="
+                  relative
+                  text-[11px]
+                  font-black uppercase
+                  tracking-[0.35em]
+                  text-white
+                  drop-shadow-[0_0_10px_rgba(196,181,253,0.55)]
+                  transition
+                  group-hover:text-violet-300
+                "
+              >
+                RAWLAB_
+              </span>
+
+              <span
+                className="
+                  mt-1 h-px w-full
+                  origin-left scale-x-60
+                  bg-gradient-to-r
+                  from-violet-300
+                  via-cyan-300
+                  to-transparent
+                  opacity-70
+                  transition
+                  group-hover:scale-x-100
+                  group-hover:opacity-100
+                "
+              />
+            </div>
 
             <p className="mt-2 text-xs leading-6 text-slate-500">
               Frontend · Mobile · Motion · Visual Systems

@@ -1201,3 +1201,241 @@ LIGHT — CURSOR SUN FLARE
 :root[data-theme="light"] .rawlab-app .text-sm {
   letter-spacing: 0.08em;
 }
+
+/* =========================================================
+RAWLAB CSS LOGO
+========================================================= */
+
+.rawlab-logo {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  width: fit-content;
+  isolation: isolate;
+}
+
+.rawlab-logo__text {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(4rem, 12vw, 9rem);
+  font-weight: 950;
+  line-height: 0.85;
+  letter-spacing: -0.08em;
+  color: #ffffff;
+  text-shadow:
+    0 0 18px rgba(196, 181, 253, 0.9),
+    0 0 44px rgba(139, 92, 246, 0.65),
+    0 0 90px rgba(56, 189, 248, 0.35);
+  animation: rawlab-logo-pulse 3.8s ease-in-out infinite;
+}
+
+.rawlab-logo__text::before,
+.rawlab-logo__text::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.rawlab-logo__text::before {
+  color: #67e8f9;
+  transform: translate(4px, 0);
+  clip-path: inset(0 0 52% 0);
+  animation: rawlab-glitch-a 2.8s infinite linear alternate-reverse;
+}
+
+.rawlab-logo__text::after {
+  color: #c084fc;
+  transform: translate(-4px, 0);
+  clip-path: inset(46% 0 0 0);
+  animation: rawlab-glitch-b 3.2s infinite linear alternate-reverse;
+}
+
+.rawlab-logo__scan {
+  position: absolute;
+  inset: -20%;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.32) 50%,
+    transparent 100%
+  );
+  transform: translateY(-120%);
+  animation: rawlab-scan 3.6s ease-in-out infinite;
+  mix-blend-mode: overlay;
+}
+
+.rawlab-logo__flare {
+  position: absolute;
+  inset: -35%;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(139, 92, 246, 0.55), transparent 36%),
+    radial-gradient(circle at 70% 50%, rgba(56, 189, 248, 0.32), transparent 34%);
+  filter: blur(42px);
+  animation: rawlab-flare 5.5s ease-in-out infinite;
+}
+
+.rawlab-logo__line {
+  position: relative;
+  z-index: 2;
+  margin-top: 1.2rem;
+  height: 3px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.rawlab-logo__line::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #c4b5fd,
+    #67e8f9,
+    transparent
+  );
+  animation: rawlab-line 2.4s ease-in-out infinite;
+}
+
+/* LIGHT */
+:root[data-theme="light"] .rawlab-logo__text {
+  color: #fff7ed;
+  text-shadow:
+    0 0 18px rgba(255, 122, 0, 0.95),
+    0 0 48px rgba(255, 180, 80, 0.65),
+    0 0 100px rgba(255, 90, 0, 0.42);
+}
+
+:root[data-theme="light"] .rawlab-logo__text::before {
+  color: #ffb347;
+}
+
+:root[data-theme="light"] .rawlab-logo__text::after {
+  color: #ff5a00;
+}
+
+:root[data-theme="light"] .rawlab-logo__flare {
+  background:
+    radial-gradient(circle at 30% 40%, rgba(255, 180, 0, 0.65), transparent 36%),
+    radial-gradient(circle at 70% 50%, rgba(255, 90, 0, 0.38), transparent 34%);
+}
+
+:root[data-theme="light"] .rawlab-logo__line::before {
+  background: linear-gradient(90deg, transparent, #ffcc73, #ff6a00, transparent);
+}
+
+/* FOCUS */
+:root[data-theme="focus"] .rawlab-logo__text {
+  font-family: monospace;
+  color: #00ff9c;
+  letter-spacing: 0.04em;
+  text-shadow:
+    0 0 18px rgba(0, 255, 156, 0.95),
+    0 0 48px rgba(0, 255, 156, 0.52),
+    0 0 100px rgba(0, 255, 156, 0.28);
+}
+
+:root[data-theme="focus"] .rawlab-logo__text::before {
+  color: #7dffcf;
+}
+
+:root[data-theme="focus"] .rawlab-logo__text::after {
+  color: #00ff9c;
+}
+
+:root[data-theme="focus"] .rawlab-logo__flare {
+  background:
+    radial-gradient(circle at 30% 40%, rgba(0, 255, 156, 0.45), transparent 36%),
+    radial-gradient(circle at 70% 50%, rgba(125, 255, 207, 0.24), transparent 34%);
+}
+
+:root[data-theme="focus"] .rawlab-logo__line::before {
+  background: linear-gradient(90deg, transparent, #00ff9c, #7dffcf, transparent);
+}
+
+@keyframes rawlab-logo-pulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+
+  50% {
+    transform: scale(1.025);
+    filter: brightness(1.25);
+  }
+}
+
+@keyframes rawlab-glitch-a {
+  0%, 90%, 100% {
+    transform: translate(3px, 0);
+  }
+
+  92% {
+    transform: translate(12px, -2px);
+  }
+
+  94% {
+    transform: translate(-8px, 2px);
+  }
+}
+
+@keyframes rawlab-glitch-b {
+  0%, 88%, 100% {
+    transform: translate(-3px, 0);
+  }
+
+  90% {
+    transform: translate(-12px, 2px);
+  }
+
+  93% {
+    transform: translate(8px, -2px);
+  }
+}
+
+@keyframes rawlab-scan {
+  0%, 55% {
+    transform: translateY(-120%);
+    opacity: 0;
+  }
+
+  70% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(120%);
+    opacity: 0;
+  }
+}
+
+@keyframes rawlab-flare {
+  0%, 100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.14);
+  }
+}
+
+@keyframes rawlab-line {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}

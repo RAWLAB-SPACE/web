@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { RawlabLogo } from "@/components/RawlabLogo";
 
 const environments = [
   {
@@ -33,7 +34,7 @@ export function BootLoader() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setVisible(false);
-    }, 3200);
+    }, 3400);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -58,7 +59,10 @@ export function BootLoader() {
             bg-black
           "
         >
-          {/* atmospheric glow */}
+          {/* =========================================================
+              ATMOSPHERIC BACKGROUND
+          ========================================================= */}
+
           <div
             className="
               absolute inset-0
@@ -96,7 +100,7 @@ export function BootLoader() {
             "
           />
 
-          {/* environment orbit */}
+          {/* ambient orbit */}
           <motion.div
             initial={{ opacity: 0, scale: 0.85, rotate: -8 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -124,30 +128,39 @@ export function BootLoader() {
             "
           />
 
+          {/* =========================================================
+              CONTENT
+          ========================================================= */}
+
           <div className="relative z-10 text-center">
-            <motion.h1
+            {/* LOGO */}
+            <motion.div
               initial={{
                 opacity: 0,
                 y: 30,
+                scale: 0.92,
                 filter: "blur(10px)",
               }}
               animate={{
                 opacity: 1,
                 y: 0,
+                scale: 1,
                 filter: "blur(0px)",
               }}
               transition={{
-                duration: 1,
+                duration: 1.1,
                 ease: [0.76, 0, 0.24, 1],
               }}
               className="
-                text-5xl font-black tracking-[0.3em]
-                text-white md:text-7xl
+                flex justify-center
               "
             >
-              RAWLAB_
-            </motion.h1>
+              <div className="scale-[0.65] md:scale-[0.9]">
+                <RawlabLogo />
+              </div>
+            </motion.div>
 
+            {/* boot text */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -156,7 +169,7 @@ export function BootLoader() {
                 duration: 1,
               }}
               className="
-                mt-6
+                mt-2
                 text-xs uppercase tracking-[0.45em]
                 text-violet-300/70
               "
@@ -164,7 +177,10 @@ export function BootLoader() {
               initializing environments...
             </motion.p>
 
-            {/* three environments */}
+            {/* =========================================================
+                ENVIRONMENT CARDS
+            ========================================================= */}
+
             <motion.div
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
@@ -197,49 +213,68 @@ export function BootLoader() {
                     duration: 0.6,
                     ease: [0.76, 0, 0.24, 1],
                   }}
+                  whileHover={{
+                    y: -4,
+                    scale: 1.02,
+                  }}
                   className="
+                    relative overflow-hidden
                     rounded-2xl border border-white/10
                     bg-white/[0.035]
                     px-5 py-4
                     backdrop-blur-xl
                   "
                 >
-                  <div className="mb-3 flex items-center justify-center gap-2">
-                    <motion.span
-                      animate={{
-                        scale: [1, 1.35, 1],
-                        opacity: [0.7, 1, 0.7],
-                      }}
-                      transition={{
-                        duration: 1.8,
-                        repeat: Infinity,
-                        delay: index * 0.25,
-                        ease: "easeInOut",
-                      }}
-                      className={`
-                        h-2 w-2 rounded-full
-                        ${environment.dot}
-                        ${environment.glow}
-                      `}
-                    />
+                  {/* glow */}
+                  <div
+                    className={`
+                      absolute inset-0 opacity-0 transition
+                      group-hover:opacity-100
+                    `}
+                  />
 
-                    <span
-                      className={`
-                        font-mono text-[10px]
-                        uppercase tracking-[0.3em]
-                        ${environment.text}
-                      `}
-                    >
-                      {environment.name}
-                    </span>
+                  <div className="relative z-10">
+                    <div className="mb-3 flex items-center justify-center gap-2">
+                      <motion.span
+                        animate={{
+                          scale: [1, 1.35, 1],
+                          opacity: [0.7, 1, 0.7],
+                        }}
+                        transition={{
+                          duration: 1.8,
+                          repeat: Infinity,
+                          delay: index * 0.25,
+                          ease: "easeInOut",
+                        }}
+                        className={`
+                          h-2 w-2 rounded-full
+                          ${environment.dot}
+                          ${environment.glow}
+                        `}
+                      />
+
+                      <span
+                        className={`
+                          font-mono text-[10px]
+                          uppercase tracking-[0.3em]
+                          ${environment.text}
+                        `}
+                      >
+                        {environment.name}
+                      </span>
+                    </div>
+
+                    <p className="font-mono text-[9px] uppercase tracking-[0.24em] text-white/35">
+                      {environment.label}
+                    </p>
                   </div>
-
-                  <p className="font-mono text-[9px] uppercase tracking-[0.24em] text-white/35">
-                    {environment.label}
-                  </p>
                 </motion.div>
               ))}
             </motion.div>
+
+            {/* =========================================================
+                PROGRESS LINE
+            ========================================================= */}
 
             <motion.div
               initial={{ scaleX: 0 }}
@@ -258,6 +293,10 @@ export function BootLoader() {
                 to-emerald-300
               "
             />
+
+            {/* =========================================================
+                FOOTER LABEL
+            ========================================================= */}
 
             <motion.p
               initial={{

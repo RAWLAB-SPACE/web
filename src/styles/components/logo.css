@@ -1,0 +1,251 @@
+/* =========================================================
+   RAWLAB LOGO
+========================================================= */
+
+.rawlab-logo {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  user-select: none;
+}
+
+.rawlab-logo-text {
+  position: relative;
+
+  font-size: clamp(2rem, 6vw, 7rem);
+  font-weight: 900;
+
+  letter-spacing: 0.28em;
+  line-height: 0.9;
+
+  color: white;
+
+  transform-style: preserve-3d;
+
+  will-change:
+    transform,
+    filter,
+    text-shadow;
+
+  animation:
+    rawlab-logo-breathe 6s ease-in-out infinite;
+}
+
+/* underline */
+
+.rawlab-logo-line {
+  position: relative;
+
+  height: 1px;
+  width: 100%;
+
+  overflow: hidden;
+}
+
+.rawlab-logo-line::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  transform-origin: left;
+
+  animation:
+    rawlab-line-flow 4s ease-in-out infinite;
+}
+
+/* atmosphere */
+
+.rawlab-logo-glow {
+  position: absolute;
+
+  inset: -30%;
+
+  pointer-events: none;
+
+  filter: blur(60px);
+
+  opacity: 0.7;
+
+  z-index: -1;
+
+  animation:
+    rawlab-glow-pulse 8s ease-in-out infinite;
+}
+
+/* =========================================================
+   VOID
+========================================================= */
+
+.rawlab-logo-void .rawlab-logo-text {
+  color: white;
+
+  text-shadow:
+    0 0 12px rgba(196,181,253,0.35),
+    0 0 42px rgba(56,189,248,0.18);
+}
+
+.rawlab-logo-void .rawlab-logo-line::before {
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(196,181,253,1),
+      rgba(56,189,248,1),
+      transparent
+    );
+}
+
+.rawlab-logo-void .rawlab-logo-glow {
+  background:
+    radial-gradient(
+      circle,
+      rgba(139,92,246,0.22),
+      transparent 70%
+    );
+}
+
+/* =========================================================
+   LIGHT
+========================================================= */
+
+.rawlab-logo-light .rawlab-logo-text {
+  color: #fff7ed;
+
+  text-shadow:
+    0 0 18px rgba(255,140,0,0.35),
+    0 0 60px rgba(255,180,80,0.24);
+}
+
+.rawlab-logo-light .rawlab-logo-line::before {
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #ffb347,
+      #ff6a00,
+      transparent
+    );
+}
+
+.rawlab-logo-light .rawlab-logo-glow {
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,140,0,0.32),
+      transparent 70%
+    );
+}
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+.rawlab-logo-focus .rawlab-logo-text {
+  color: #00ff9c;
+
+  font-family: monospace;
+
+  text-shadow:
+    0 0 12px rgba(0,255,156,0.5),
+    0 0 42px rgba(0,255,156,0.2);
+
+  animation:
+    rawlab-logo-breathe 6s ease-in-out infinite,
+    rawlab-terminal-flicker 3s infinite;
+}
+
+.rawlab-logo-focus .rawlab-logo-line::before {
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #00ff9c,
+      #7dffcf,
+      transparent
+    );
+}
+
+.rawlab-logo-focus .rawlab-logo-glow {
+  background:
+    radial-gradient(
+      circle,
+      rgba(0,255,156,0.22),
+      transparent 70%
+    );
+}
+
+/* =========================================================
+   KEYFRAMES
+========================================================= */
+
+@keyframes rawlab-logo-breathe {
+  0%,
+  100% {
+    transform:
+      translateY(0)
+      scale(1);
+
+    filter: blur(0px);
+  }
+
+  50% {
+    transform:
+      translateY(-2px)
+      scale(1.015);
+
+    filter: blur(0.2px);
+  }
+}
+
+@keyframes rawlab-line-flow {
+  0% {
+    transform:
+      translateX(-100%)
+      scaleX(0.2);
+
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform:
+      translateX(100%)
+      scaleX(1);
+
+    opacity: 0;
+  }
+}
+
+@keyframes rawlab-glow-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+
+  50% {
+    transform: scale(1.08);
+    opacity: 0.9;
+  }
+}
+
+@keyframes rawlab-terminal-flicker {
+  0%,
+  19%,
+  21%,
+  63%,
+  65%,
+  100% {
+    opacity: 1;
+  }
+
+  20%,
+  64% {
+    opacity: 0.3;
+  }
+}
