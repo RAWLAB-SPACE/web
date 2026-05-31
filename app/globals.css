@@ -1439,3 +1439,113 @@ RAWLAB CSS LOGO
     transform: translateX(100%);
   }
 }
+/* =========================================================
+   GITHUB SECTION — THEME REFINEMENTS
+========================================================= */
+
+:root[data-theme="light"] #github {
+  color: #2e1200;
+}
+
+:root[data-theme="light"] #github h2 {
+  color: #ff5a00;
+}
+
+:root[data-theme="light"] #github p,
+:root[data-theme="light"] #github span {
+  color: #315b87;
+}
+
+:root[data-theme="light"] #github article,
+:root[data-theme="light"] #github aside,
+:root[data-theme="light"] #github .repo-signal-panel {
+  border-color: rgba(255, 130, 0, 0.18);
+  background: rgba(255, 248, 235, 0.28);
+  box-shadow:
+    0 18px 50px rgba(255, 120, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+:root[data-theme="light"] #github .repo-signal-muted {
+  color: #315b87 !important;
+}
+
+:root[data-theme="light"] #github .repo-signal-title {
+  color: #ff5a00 !important;
+}
+
+:root[data-theme="focus"] #github h2 {
+  color: #00ff9c;
+  text-shadow: 0 0 18px rgba(0, 255, 156, 0.38);
+}
+
+:root[data-theme="focus"] #github article,
+:root[data-theme="focus"] #github aside,
+:root[data-theme="focus"] #github .repo-signal-panel {
+  border-color: rgba(0, 255, 156, 0.16);
+  background: rgba(0, 10, 6, 0.44);
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 255, 156, 0.04),
+    0 0 24px rgba(0, 255, 156, 0.06);
+}
+
+:root[data-theme="focus"] #github .repo-signal-title {
+  color: #00ff9c !important;
+}
+
+:root[data-theme="focus"] #github .repo-signal-muted {
+  color: rgba(255, 255, 255, 0.72) !important;
+}
+
+/* =========================================================
+   REPO SIGNAL GRAPH — THEME STATES
+========================================================= */
+
+:root[data-theme="light"] #github .repo-signal-panel {
+  border-color: rgba(255, 130, 0, 0.18);
+  background: rgba(255, 248, 235, 0.28);
+  box-shadow:
+    0 18px 50px rgba(255, 120, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+:root[data-theme="light"] #github .repo-signal-panel > div {
+  color: #315b87;
+}
+
+:root[data-theme="light"] #github .repo-signal-muted {
+  color: #315b87 !important;
+}
+
+:root[data-theme="light"] #github .repo-signal-title {
+  color: #ff5a00 !important;
+}
+
+:root[data-theme="light"] #github .repo-signal-panel .text-white {
+  color: #ff5a00 !important;
+}
+
+:root[data-theme="light"] #github .repo-signal-panel .text-slate-300 {
+  color: #23476f !important;
+}
+
+:root[data-theme="light"] #github .repo-signal-panel .text-slate-500,
+:root[data-theme="light"] #github .repo-signal-panel .text-slate-600 {
+  color: #315b87 !important;
+}
+
+:root[data-theme="focus"] #github .repo-signal-panel {
+  border-color: rgba(0, 255, 156, 0.18);
+  background: rgba(0, 10, 6, 0.48);
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 255, 156, 0.04),
+    0 0 24px rgba(0, 255, 156, 0.06);
+}
+
+:root[data-theme="focus"] #github .repo-signal-title {
+  color: #00ff9c !important;
+}
+
+:root[data-theme="focus"] #github .repo-signal-muted {
+  color: rgba(255, 255, 255, 0.72) !important;
+}
