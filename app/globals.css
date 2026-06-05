@@ -1549,3 +1549,13 @@ RAWLAB CSS LOGO
 :root[data-theme="focus"] #github .repo-signal-muted {
   color: rgba(255, 255, 255, 0.72) !important;
 }
+
+@keyframes repoProgress {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
+}

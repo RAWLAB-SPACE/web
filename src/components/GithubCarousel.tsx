@@ -1,13 +1,21 @@
 "use client";
 
-import { useState } from "react";
-import { ChevronLeft, ChevronRight, ExternalLink, GitFork, Star } from "lucide-react";
+import { useEffect, useState } from "react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ExternalLink,
+  GitFork,
+  Star,
+} from "lucide-react";
 import { RepoSignalGraph } from "@/components/RepoSignalGraph";
 import type { GithubRepo } from "@/lib/github";
 
 type GithubCarouselProps = {
   repos: GithubRepo[];
 };
+
+const AUTOPLAY_DELAY = 2000;
 
 function formatDate(date: string) {
   return new Intl.DateTimeFormat("en", {
@@ -63,6 +71,22 @@ function getLanguageTheme(language?: string | null) {
 
 export function GithubCarousel({ repos }: GithubCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [progressKey, setProgressKey] = useState(0);
+
+  useEffect(() => {
+    if (isPaused || repos.length <= 1) return;
+
+    const interval = window.setInterval(() => {
+      setActiveIndex((current) =>
+        current === repos.length - 1 ? 0 : current + 1,
+      );
+
+      setProgressKey((current) => current + 1);
+    }, AUTOPLAY_DELAY);
+
+    return () => window.clearInterval(interval);
+  }, [isPaused, repos.length]);
 
   if (repos.length === 0) {
     return (
@@ -77,16 +101,29 @@ export function GithubCarousel({ repos }: GithubCarouselProps) {
   const activeRepo = repos[activeIndex];
   const theme = getLanguageTheme(activeRepo.language);
 
+  function resetProgress() {
+    setProgressKey((current) => current + 1);
+  }
+
   function goToPrevious() {
     setActiveIndex((current) =>
       current === 0 ? repos.length - 1 : current - 1,
     );
+
+    resetProgress();
   }
 
   function goToNext() {
     setActiveIndex((current) =>
       current === repos.length - 1 ? 0 : current + 1,
     );
+
+    resetProgress();
+  }
+
+  function selectRepo(index: number) {
+    setActiveIndex(index);
+    resetProgress();
   }
 
   const fallbackTopics = ["rawlab", "frontend", "creative-code"];
@@ -96,9 +133,18 @@ export function GithubCarousel({ repos }: GithubCarouselProps) {
     : fallbackTopics;
 
   return (
-    <div className="grid gap-5 lg:grid-cols-[1fr_0.48fr]">
+    <div
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => {
+        setIsPaused(false);
+        resetProgress();
+      }}
+      className="grid gap-5 lg:grid-cols-[1fr_0.48fr]"
+    >
       <article className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl md:p-7">
-        <div className={`absolute -right-16 -top-16 h-48 w-48 rounded-full ${theme.glow} blur-3xl`} />
+        <div
+          className={`absolute -right-16 -top-16 h-48 w-48 rounded-full ${theme.glow} blur-3xl`}
+        />
 
         <div className="relative z-10">
           <div className="flex flex-wrap items-center justify-between gap-4">
@@ -208,6 +254,33 @@ export function GithubCarousel({ repos }: GithubCarouselProps) {
             {String(repos.length).padStart(2, "0")}
           </p>
 
+          <div className="mt-3">
+            <div className="mb-2 flex items-center justify-between">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-slate-500">
+                {isPaused ? "Paused" : "Auto stream"}
+              </p>
+
+              <span className="text-[10px] text-slate-600">2s</span>
+            </div>
+
+            <div className="h-1 overflow-hidden rounded-full bg-white/5">
+              {!isPaused && (
+                <div
+                  key={progressKey}
+                  className="
+                    h-full
+                    animate-[repoProgress_2s_linear_forwards]
+                    rounded-full
+                    bg-gradient-to-r
+                    from-violet-400
+                    via-cyan-300
+                    to-violet-400
+                  "
+                />
+              )}
+            </div>
+          </div>
+
           <h4 className="mt-5 text-xl font-semibold">Repository stream</h4>
 
           <div className="mt-5 grid gap-2">
@@ -218,7 +291,7 @@ export function GithubCarousel({ repos }: GithubCarouselProps) {
               return (
                 <button
                   key={repo.id}
-                  onClick={() => setActiveIndex(index)}
+                  onClick={() => selectRepo(index)}
                   className={`
                     rounded-2xl border p-3 text-left transition
                     ${
@@ -229,7 +302,11 @@ export function GithubCarousel({ repos }: GithubCarouselProps) {
                   `}
                 >
                   <div className="flex items-center justify-between gap-3">
-                    <p className={`text-[10px] uppercase tracking-[0.22em] ${active ? itemTheme.text : "text-slate-500"}`}>
+                    <p
+                      className={`text-[10px] uppercase tracking-[0.22em] ${
+                        active ? itemTheme.text : "text-slate-500"
+                      }`}
+                    >
                       {repo.language || "Code"}
                     </p>
 
