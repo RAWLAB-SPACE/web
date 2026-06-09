@@ -8,26 +8,17 @@ import { SignalNoise } from "@/components/SignalNoise";
 import { SectionIndicator } from "@/components/SectionIndicator";
 import { BootLoader } from "@/components/system/BootLoader";
 import { MatrixRain } from "@/components/MatrixRain";
+import { SunCursorGlow } from "@/components/SunCursorGlow";
+import { ScrollBloom } from "@/components/ScrollBloom";
 
 import { LanguageProvider } from "@/context/LanguageContext";
 
 import { HeroSection } from "@/sections/HeroSection";
-import { AreasSection } from "@/sections/AreasSection";
-import { CurrentStateSection } from "@/sections/CurrentStateSection";
 import { ProjectsPreviewSection } from "@/sections/ProjectsPreviewSection";
+import { BuilderProfileSection } from "@/sections/BuilderProfileSection";
 import { GithubSectionServer } from "@/sections/GithubSectionServer";
-import { RawlogSection } from "@/sections/RawlogSection";
-import { LivingArchiveSection } from "@/sections/LivingArchiveSection";
 import { VisualArchiveSection } from "@/sections/VisualArchiveSection";
-import { ConnectedSignalsSection } from "@/sections/ConnectedSignalsSection";
 import { InstagramSignalSectionServer } from "@/sections/InstagramSignalSectionServer";
-import { DocumentsSection } from "@/sections/DocumentsSection";
-import { ManifestoSection } from "@/sections/ManifestoSection";
-import { ExperienceSignalSection } from "@/sections/ExperienceSignalSection";
-import { AboutSignalSection } from "@/sections/AboutSignalSection";
-import { SystemCapabilitiesSection } from "@/sections/SystemCapabilitiesSection";
-import { SunCursorGlow } from "@/components/SunCursorGlow";
-import { ScrollBloom } from "@/components/ScrollBloom";
 
 export const dynamic = "force-dynamic";
 
@@ -36,10 +27,10 @@ export default function Home() {
     <main
       className="rawlab-app min-h-screen overflow-x-hidden raw-scanlines transition-colors duration-500"
       style={{
-          background: "var(--background)",
-          color: "var(--foreground)",
-          backgroundAttachment: "fixed",
-        }}
+        background: "var(--background)",
+        color: "var(--foreground)",
+        backgroundAttachment: "fixed",
+      }}
     >
       <BootLoader />
 
@@ -60,36 +51,17 @@ export default function Home() {
           <Navigation />
 
           <HeroSection />
-          <AreasSection />
-          <CurrentStateSection />
           <ProjectsPreviewSection />
-          <ExperienceSignalSection />
-          <AboutSignalSection />
-          <SystemCapabilitiesSection />
+          <BuilderProfileSection />
           <GithubSectionServer />
-
-          <div className="focus-hidden">
-            <RawlogSection />
-          </div>
-
-          <div className="focus-hidden">
-            <LivingArchiveSection />
-          </div>
 
           <div className="focus-hidden">
             <VisualArchiveSection />
           </div>
 
           <div className="focus-hidden">
-            <ConnectedSignalsSection />
-          </div>
-
-          <div className="focus-hidden">
             <InstagramSignalSectionServer />
           </div>
-
-          <DocumentsSection />
-          <ManifestoSection />
 
           <Footer />
         </div>
