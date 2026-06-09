@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 
 import { EnvironmentToggle } from "@/components/EnvironmentToggle";
 import { LanguageToggle } from "@/components/LanguageToggle";
-
 import { useActiveSection } from "@/hooks/useActiveSection";
 
 const navItems = [
@@ -14,26 +13,19 @@ const navItems = [
     label: "Projects",
     href: "#projects-preview",
     id: "projects-preview",
+    activeIds: ["projects-preview"],
   },
   {
-    label: "Profile",
+    label: "Systems",
     href: "#builder-profile",
     id: "builder-profile",
-  },
-  {
-    label: "GitHub",
-    href: "#github",
-    id: "github",
+    activeIds: ["builder-profile", "github"],
   },
   {
     label: "Archive",
     href: "#visual-archive",
     id: "visual-archive",
-  },
-  {
-    label: "Social",
-    href: "#instagram",
-    id: "instagram",
+    activeIds: ["visual-archive", "instagram"],
   },
 ];
 
@@ -49,6 +41,7 @@ export function Navigation() {
     };
 
     handleScroll();
+
     window.addEventListener("scroll", handleScroll);
 
     return () => {
@@ -110,23 +103,11 @@ export function Navigation() {
               "
             />
 
-            <span
-              className="
-                relative text-[10px] text-white
-                drop-shadow-[0_0_10px_rgba(196,181,253,0.45)]
-                transition group-hover:text-violet-300 md:hidden
-              "
-            >
+            <span className="relative text-[10px] drop-shadow-[0_0_10px_rgba(196,181,253,0.45)] transition group-hover:text-violet-300 md:hidden">
               RAW_
             </span>
 
-            <span
-              className="
-                relative hidden text-xs text-white
-                drop-shadow-[0_0_10px_rgba(196,181,253,0.45)]
-                transition group-hover:text-violet-300 md:inline
-              "
-            >
+            <span className="relative hidden text-xs drop-shadow-[0_0_10px_rgba(196,181,253,0.45)] transition group-hover:text-violet-300 md:inline">
               RAWLAB_
             </span>
 
@@ -143,7 +124,7 @@ export function Navigation() {
 
           <div className="hidden items-center gap-2 md:flex">
             {navItems.map((item) => {
-              const active = activeSection === item.id;
+              const active = item.activeIds.includes(activeSection);
 
               return (
                 <motion.a
@@ -192,7 +173,11 @@ export function Navigation() {
                 exit={{ opacity: 0, rotate: 90, scale: 0.8 }}
                 transition={{ duration: 0.18 }}
               >
-                {isOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+                {isOpen ? (
+                  <X className="h-4 w-4" />
+                ) : (
+                  <Menu className="h-4 w-4" />
+                )}
               </motion.div>
             </AnimatePresence>
           </button>
@@ -224,19 +209,14 @@ export function Navigation() {
               "
             >
               <div className="mb-5 flex justify-center border-b border-white/[0.05] pb-5">
-                <div
-                  className="
-                    relative text-[11px] font-black uppercase tracking-[0.35em]
-                    text-white drop-shadow-[0_0_10px_rgba(196,181,253,0.45)]
-                  "
-                >
+                <div className="text-[11px] font-black uppercase tracking-[0.35em] text-white drop-shadow-[0_0_10px_rgba(196,181,253,0.45)]">
                   RAWLAB_
                 </div>
               </div>
 
               <div className="flex flex-col gap-2">
                 {navItems.map((item, index) => {
-                  const active = activeSection === item.id;
+                  const active = item.activeIds.includes(activeSection);
 
                   return (
                     <motion.a
