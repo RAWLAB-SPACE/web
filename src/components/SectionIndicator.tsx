@@ -13,22 +13,17 @@ type SectionItem = {
 const defaultSections: SectionItem[] = [
   { id: "hero", label: "Entry" },
   { id: "projects-preview", label: "Projects" },
+  { id: "builder-profile", label: "Profile" },
   { id: "github", label: "GitHub" },
   { id: "visual-archive", label: "Archive" },
-  { id: "instagram", label: "Instagram" },
-  { id: "documents", label: "Docs" },
-  { id: "manifesto", label: "Manifesto" },
+  { id: "instagram", label: "Social" },
 ];
 
 const focusSections: SectionItem[] = [
   { id: "hero", label: "System" },
   { id: "projects-preview", label: "Projects" },
-  { id: "experience-signal", label: "Experience" },
-  { id: "about-signal", label: "About" },
-  { id: "system-capabilities", label: "Stack" },
+  { id: "builder-profile", label: "Profile" },
   { id: "github", label: "GitHub" },
-  { id: "documents", label: "Docs" },
-  { id: "manifesto", label: "Manifesto" },
 ];
 
 function getCurrentTheme(): Theme {
@@ -142,13 +137,12 @@ export function SectionIndicator() {
       aria-label="Section navigation"
     >
       <div
-       className="
-  section-indicator
-  flex flex-col items-center gap-4
-  rounded-full
-  px-2.5 py-4
-  backdrop-blur-xl
-"
+        className="
+          section-indicator
+          flex flex-col items-center gap-4
+          rounded-full px-2.5 py-4
+          backdrop-blur-xl
+        "
       >
         {sections.map((section) => {
           const active = activeSection === section.id;
@@ -180,8 +174,8 @@ export function SectionIndicator() {
                       h-1.5 w-1.5 rounded-full transition-all duration-300
                       ${
                         active
-  ? "section-indicator-active scale-150"
-  : "section-indicator-inactive"
+                          ? "section-indicator-active scale-150"
+                          : "section-indicator-inactive"
                       }
                     `
                 }
